@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes" />
+    <style>
+      html {
+        font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background-color: #fff;
+        font-size: 16px;
+      }
+      body {
+        color: #4a4a4a;
+        margin: 8px;
+        font-size: 1em;
+        font-weight: 400;
+      }
+      header {
+        margin-bottom: 8px;
+        display: flex;
+        flex-direction: column;
+      }
+      main {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      a {
+        color: #3273dc;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #000;
+      }
+      button {
+        color: #fff;
+        background-color: #3298dc;
+        border-color: transparent;
+        cursor: pointer;
+        text-align: center;
+      }
+      button:hover {
+        background-color: #2793da;
+        flex: none;
+      }
+      .spacer {
+        flex: auto;
+      }
+      .small {
+        font-size: 0.75rem;
+      }
+      footer {
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+      }
+      .header-label {
+        margin-right: 4px;
+      }
+      .benchmark-set {
+        margin: 8px 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .benchmark-title {
+        font-size: 3rem;
+        font-weight: 600;
+        word-break: break-word;
+        text-align: center;
+      }
+      .benchmark-graphs {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+      .benchmark-chart {
+        max-width: 1000px;
+        min-height: 400px;
+        width: 100%;
+      }
+    </style>
+    <title>Benchmarks</title>
+  </head>
+
+  <body>
+    <header id="header">
+      <div class="header-item">
+        <strong class="header-label">Last Update:</strong>
+        <span id="last-update"></span>
+      </div>
+      <div class="header-item">
+        <strong class="header-label">Repository:</strong>
+        <a id="repository-link" rel="noopener"></a>
+      </div>
+    </header>
+    <main id="main"></main>
+    <footer>
+      <button id="dl-button">Download data as JSON</button>
+      <div class="spacer"></div>
+      <div class="small">Powered by <a rel="noopener" href="https://github.com/marketplace/actions/continuous-benchmark">github-action-benchmark</a></div>
+    </footer>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+    <script src="data.js"></script>
+    <script id="main-script">
+      'use strict';
+      (function() {
+        // Colors from https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
+        const toolColors = {
+          cargo: '#dea584',
+          go: '#00add8',
+          benchmarkjs: '#f1e05a',
+          benchmarkluau: '#000080',
+          pytest: '#3572a5',
+          googlecpp: '#f34b7d',
+          catch2: '#f34b7d',
+          julia: '#a270ba',
+          jmh: '#b07219',
+          benchmarkdotnet: '#178600',
+          customBiggerIsBetter: '#38ff38',
+          customSmallerIsBetter: '#ff3838',
+          _: '#333333'
+        };
+
+        function parseRange(rangeStr) {
+          if (!rangeStr) return 0;
+          const match = rangeStr.match(/[\d.]+/);
+          return match ? parseFloat(match[0]) : 0;
+        }
+
+        // SI prefixes for time-based units (ns base)
+        const timeScales = [
+          { threshold: 1e9,  divisor: 1e9,  prefix: 's'  },
+          { threshold: 1e6,  divisor: 1e6,  prefix: 'ms' },
+          { threshold: 1e3,  divisor: 1e3,  prefix: 'us' },
+          { threshold: 0,    divisor: 1,    prefix: 'ns' },
+        ];
+
+        // SI prefixes for byte-based units
+        const byteScales = [
+          { threshold: 1 << 30, divisor: 1 << 30, prefix: 'GB' },
+          { threshold: 1 << 20, divisor: 1 << 20, prefix: 'MB' },
+          { threshold: 1 << 10, divisor: 1 << 10, prefix: 'KB' },
+          { threshold: 0,       divisor: 1,        prefix: 'B'  },
+        ];
+
+        // Generic SI prefixes for dimensionless or unknown units
+        const siScales = [
+          { threshold: 1e9,  divisor: 1e9,  prefix: 'G' },
+          { threshold: 1e6,  divisor: 1e6,  prefix: 'M' },
+          { threshold: 1e3,  divisor: 1e3,  prefix: 'K' },
+          { threshold: 0,    divisor: 1,    prefix: ''   },
+        ];
+
+        /**
+         * Parse a unit string like "ns/iter" into its base type and suffix.
+         * Returns { base, suffix } where base is the measurable part
+         * and suffix is the per-iteration or other qualifier.
+         */
+        function parseUnit(unitStr) {
+          if (!unitStr) return { base: '', suffix: '', raw: '' };
+          const slashIdx = unitStr.indexOf('/');
+          if (slashIdx === -1) {
+            return { base: unitStr.trim(), suffix: '', raw: unitStr };
+          }
+          return {
+            base: unitStr.slice(0, slashIdx).trim(),
+            suffix: unitStr.slice(slashIdx).trim(),
+            raw: unitStr,
+          };
+        }
+
+        /**
+         * Pick the best scale for a set of values based on the unit type.
+         * Returns { divisor, scaledUnit } where scaledUnit is the
+         * human-readable unit label (e.g., "ms/iter").
+         */
+        function pickScale(maxValue, unitStr) {
+          const { base, suffix } = parseUnit(unitStr);
+          const lowerBase = base.toLowerCase();
+
+          let scales;
+          if (lowerBase === 'ns' || lowerBase === 'nanoseconds') {
+            scales = timeScales;
+          } else if (lowerBase === 'bytes' || lowerBase === 'b') {
+            scales = byteScales;
+          } else {
+            // Unknown unit — return as-is with no scaling
+            return { divisor: 1, scaledUnit: unitStr };
+          }
+
+          for (const { threshold, divisor, prefix } of scales) {
+            if (maxValue >= threshold) {
+              const scaledUnit = prefix + suffix;
+              return { divisor, scaledUnit };
+            }
+          }
+
+          // Fallback: no scaling
+          return { divisor: 1, scaledUnit: unitStr };
+        }
+
+        /**
+         * Format a scaled number for display: up to 2 decimal places,
+         * trailing zeros removed.
+         */
+        function formatScaled(value, divisor) {
+          return parseFloat((value / divisor).toPrecision(6));
+        }
+
+        function init() {
+          function collectBenchesPerTestCase(entries) {
+            const map = new Map();
+            for (const entry of entries) {
+              const {commit, date, tool, benches} = entry;
+              for (const bench of benches) {
+                const result = { commit, date, tool, bench };
+                const arr = map.get(bench.name);
+                if (arr === undefined) {
+                  map.set(bench.name, [result]);
+                } else {
+                  arr.push(result);
+                }
+              }
+            }
+            return map;
+          }
+
+          const data = window.BENCHMARK_DATA;
+
+          // Render header
+          document.getElementById('last-update').textContent = new Date(data.lastUpdate).toString();
+          const repoLink = document.getElementById('repository-link');
+          repoLink.href = data.repoUrl;
+          repoLink.textContent = data.repoUrl;
+
+          // Render footer
+          document.getElementById('dl-button').onclick = () => {
+            const dataUrl = 'data:,' + JSON.stringify(data, null, 2);
+            const a = document.createElement('a');
+            a.href = dataUrl;
+            a.download = 'benchmark_data.json';
+            a.click();
+          };
+
+          // Prepare data points for charts
+          return Object.keys(data.entries).map(name => ({
+            name,
+            dataSet: collectBenchesPerTestCase(data.entries[name]),
+          }));
+        }
+
+        function renderAllChars(dataSets) {
+
+          function renderGraph(parent, name, dataset) {
+            const chartDiv = document.createElement('div');
+            chartDiv.className = 'benchmark-chart';
+            parent.appendChild(chartDiv);
+
+            const color = toolColors[dataset.length > 0 ? dataset[0].tool : '_'];
+            const fillColor = color + '30';
+
+            const rawUnit = dataset.length > 0 ? dataset[0].bench.unit : '';
+            const rawValues = dataset.map(d => d.bench.value);
+            const rawRanges = dataset.map(d => parseRange(d.bench.range));
+            const maxValue = Math.max(...rawValues, ...rawValues.map((v, i) => v + rawRanges[i]));
+            const { divisor, scaledUnit } = pickScale(maxValue, rawUnit);
+
+            const xLabels = dataset.map(d => d.commit.id.slice(0, 7));
+            const yValues = rawValues.map(v => formatScaled(v, divisor));
+            const ranges = rawRanges.map(r => formatScaled(r, divisor));
+            const yLower = yValues.map((v, i) => v - ranges[i]);
+            const yUpper = yValues.map((v, i) => v + ranges[i]);
+            const commitUrls = dataset.map(d => d.commit.url);
+
+            const hoverTexts = dataset.map((d, i) => {
+              const { bench, commit } = d;
+              const scaledValue = yValues[i];
+              const scaledRange = ranges[i];
+              let text = '<b>' + commit.id.slice(0, 7) + '</b><br>';
+              text += commit.message + '<br><br>';
+              text += commit.timestamp + ' committed by @' + commit.committer.username + '<br>';
+              text += '<b>' + scaledValue + ' ' + scaledUnit + '</b>';
+              if (bench.range) {
+                text += ' (\u00B1 ' + scaledRange + ')';
+              }
+              if (bench.extra) {
+                text += '<br>' + bench.extra;
+              }
+              return text;
+            });
+
+            // Lower bound trace (invisible line)
+            const lowerTrace = {
+              x: xLabels,
+              y: yLower,
+              type: 'scatter',
+              mode: 'lines',
+              line: { width: 0 },
+              showlegend: false,
+              hoverinfo: 'skip',
+            };
+
+            // Main line trace with markers
+            const mainTrace = {
+              x: xLabels,
+              y: yValues,
+              type: 'scatter',
+              mode: 'lines+markers',
+              name: name,
+              line: { color: color, width: 2 },
+              marker: { color: color, size: 6 },
+              fill: 'tonexty',
+              fillcolor: fillColor,
+              text: hoverTexts,
+              hoverinfo: 'text',
+              customdata: commitUrls,
+            };
+
+            // Upper bound trace (invisible line, fills down to main)
+            const upperTrace = {
+              x: xLabels,
+              y: yUpper,
+              type: 'scatter',
+              mode: 'lines',
+              line: { width: 0 },
+              fill: 'tonexty',
+              fillcolor: fillColor,
+              showlegend: false,
+              hoverinfo: 'skip',
+            };
+
+            const layout = {
+              title: { text: name, font: { size: 14 } },
+              xaxis: { title: 'commit' },
+              yaxis: {
+                title: scaledUnit,
+                rangemode: 'tozero',
+              },
+              hovermode: 'closest',
+              margin: { t: 40, r: 20, b: 60, l: 80 },
+            };
+
+            const config = {
+              responsive: true,
+              displayModeBar: false,
+            };
+
+            Plotly.newPlot(chartDiv, [lowerTrace, mainTrace, upperTrace], layout, config);
+
+            // Click handler: open commit URL
+            chartDiv.on('plotly_click', function(eventData) {
+              if (eventData.points.length === 0) return;
+              const point = eventData.points[0];
+              if (point.customdata) {
+                window.open(point.customdata, '_blank');
+              }
+            });
+          }
+
+          function renderBenchSet(name, benchSet, main) {
+            const setElem = document.createElement('div');
+            setElem.className = 'benchmark-set';
+            main.appendChild(setElem);
+
+            const nameElem = document.createElement('h1');
+            nameElem.className = 'benchmark-title';
+            nameElem.textContent = name;
+            setElem.appendChild(nameElem);
+
+            const graphsElem = document.createElement('div');
+            graphsElem.className = 'benchmark-graphs';
+            setElem.appendChild(graphsElem);
+
+            for (const [benchName, benches] of benchSet.entries()) {
+              renderGraph(graphsElem, benchName, benches)
+            }
+          }
+
+          const main = document.getElementById('main');
+          for (const {name, dataSet} of dataSets) {
+            renderBenchSet(name, dataSet, main);
+          }
+        }
+
+        renderAllChars(init()); // Start
+      })();
+    </script>
+  </body>
+</html>
