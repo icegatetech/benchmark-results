@@ -81,8 +81,9 @@
       }
       .benchmark-chart {
         max-width: 1000px;
-        min-height: 400px;
+        min-height: 500px;
         width: 100%;
+        margin-bottom: 40px;
       }
     </style>
     <title>Benchmarks</title>
@@ -127,6 +128,12 @@
           customSmallerIsBetter: '#ff3838',
           _: '#333333'
         };
+
+        // Categorical palette for multi-trace grouped charts (Plotly D3 scheme)
+        const groupPalette = [
+          '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
+          '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf',
+        ];
 
         function parseRange(rangeStr) {
           if (!rangeStr) return 0;
@@ -214,22 +221,41 @@
           return parseFloat((value / divisor).toPrecision(6));
         }
 
+        /**
+         * Convert a snake_case group name to Title Case for chart titles.
+         * e.g. "log_stream_queries" → "Log Stream Queries"
+         */
+        function formatGroupName(name) {
+          return name.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        }
+
         function init() {
-          function collectBenchesPerTestCase(entries) {
-            const map = new Map();
+          /**
+           * Group benchmarks by the prefix before the "/" delimiter.
+           * Returns Map<groupName, Map<testName, dataPoints[]>>
+           */
+          function collectBenchesByGroup(entries) {
+            const groups = new Map();
             for (const entry of entries) {
               const {commit, date, tool, benches} = entry;
               for (const bench of benches) {
+                const slashIdx = bench.name.indexOf('/');
+                const groupName = slashIdx !== -1 ? bench.name.slice(0, slashIdx) : bench.name;
+                const testName = slashIdx !== -1 ? bench.name.slice(slashIdx + 1) : bench.name;
+
+                if (!groups.has(groupName)) {
+                  groups.set(groupName, new Map());
+                }
+                const testsMap = groups.get(groupName);
                 const result = { commit, date, tool, bench };
-                const arr = map.get(bench.name);
-                if (arr === undefined) {
-                  map.set(bench.name, [result]);
+                if (!testsMap.has(testName)) {
+                  testsMap.set(testName, [result]);
                 } else {
-                  arr.push(result);
+                  testsMap.get(testName).push(result);
                 }
               }
             }
-            return map;
+            return groups;
           }
 
           const data = window.BENCHMARK_DATA;
@@ -249,102 +275,133 @@
             a.click();
           };
 
-          // Prepare data points for charts
+          // Prepare data points for charts, grouped by benchmark prefix
           return Object.keys(data.entries).map(name => ({
             name,
-            dataSet: collectBenchesPerTestCase(data.entries[name]),
+            dataSet: collectBenchesByGroup(data.entries[name]),
           }));
         }
 
         function renderAllChars(dataSets) {
 
-          function renderGraph(parent, name, dataset) {
+          /**
+           * Render a single grouped chart with one trace per metric.
+           * @param parent  – DOM container
+           * @param groupName – raw group key (e.g. "log_stream_queries")
+           * @param testsMap  – Map<testName, dataPoints[]>
+           */
+          function renderGroupedGraph(parent, groupName, testsMap) {
             const chartDiv = document.createElement('div');
             chartDiv.className = 'benchmark-chart';
             parent.appendChild(chartDiv);
 
-            const color = toolColors[dataset.length > 0 ? dataset[0].tool : '_'];
-            const fillColor = color + '30';
-
-            const rawUnit = dataset.length > 0 ? dataset[0].bench.unit : '';
-            const rawValues = dataset.map(d => d.bench.value);
-            const rawRanges = dataset.map(d => parseRange(d.bench.range));
-            const maxValue = Math.max(...rawValues, ...rawValues.map((v, i) => v + rawRanges[i]));
-            const { divisor, scaledUnit } = pickScale(maxValue, rawUnit);
-
-            const xLabels = dataset.map(d => d.commit.id.slice(0, 7));
-            const yValues = rawValues.map(v => formatScaled(v, divisor));
-            const ranges = rawRanges.map(r => formatScaled(r, divisor));
-            const yLower = yValues.map((v, i) => v - ranges[i]);
-            const yUpper = yValues.map((v, i) => v + ranges[i]);
-            const commitUrls = dataset.map(d => d.commit.url);
-
-            const hoverTexts = dataset.map((d, i) => {
-              const { bench, commit } = d;
-              const scaledValue = yValues[i];
-              const scaledRange = ranges[i];
-              let text = '<b>' + commit.id.slice(0, 7) + '</b><br>';
-              text += commit.message + '<br><br>';
-              text += commit.timestamp + ' committed by @' + commit.committer.username + '<br>';
-              text += '<b>' + scaledValue + ' ' + scaledUnit + '</b>';
-              if (bench.range) {
-                text += ' (\u00B1 ' + scaledRange + ')';
+            // Determine a unified scale across all metrics in this group
+            let globalMax = 0;
+            let rawUnit = '';
+            for (const dataPoints of testsMap.values()) {
+              if (!rawUnit && dataPoints.length > 0) {
+                rawUnit = dataPoints[0].bench.unit;
               }
-              if (bench.extra) {
-                text += '<br>' + bench.extra;
+              for (const d of dataPoints) {
+                const upper = d.bench.value + parseRange(d.bench.range);
+                if (upper > globalMax) globalMax = upper;
+                if (d.bench.value > globalMax) globalMax = d.bench.value;
               }
-              return text;
+            }
+            const { divisor, scaledUnit } = pickScale(globalMax, rawUnit);
+
+            const traces = [];
+
+            // Invisible commit-info trace (shown once in unified tooltip)
+            const firstDataset = [...testsMap.values()][0];
+            traces.push({
+              x: firstDataset.map(d => d.commit.id.slice(0, 7)),
+              y: firstDataset.map(d => formatScaled(d.bench.value, divisor)),
+              type: 'scatter',
+              mode: 'markers',
+              marker: { size: 0.01, color: 'rgba(0,0,0,0)' },
+              name: ' ',
+              showlegend: false,
+              text: firstDataset.map(d => {
+                const { commit } = d;
+                return commit.message + '<br>' +
+                  commit.timestamp + ' by @' + commit.committer.username;
+              }),
+              hoverinfo: 'text',
+              customdata: firstDataset.map(d => d.commit.url),
             });
 
-            // Lower bound trace (invisible line)
-            const lowerTrace = {
-              x: xLabels,
-              y: yLower,
-              type: 'scatter',
-              mode: 'lines',
-              line: { width: 0 },
-              showlegend: false,
-              hoverinfo: 'skip',
-            };
+            // Build metric traces, then sort by average value (descending)
+            const metricTraces = [];
+            let colorIdx = 0;
+            for (const [testName, dataset] of testsMap.entries()) {
+              const color = groupPalette[colorIdx % groupPalette.length];
+              colorIdx++;
 
-            // Main line trace with markers
-            const mainTrace = {
-              x: xLabels,
-              y: yValues,
-              type: 'scatter',
-              mode: 'lines+markers',
-              name: name,
-              line: { color: color, width: 2 },
-              marker: { color: color, size: 6 },
-              fill: 'tonexty',
-              fillcolor: fillColor,
-              text: hoverTexts,
-              hoverinfo: 'text',
-              customdata: commitUrls,
-            };
+              const xLabels = dataset.map(d => d.commit.id.slice(0, 7));
+              const yValues = dataset.map(d => formatScaled(d.bench.value, divisor));
+              const ranges = dataset.map(d => formatScaled(parseRange(d.bench.range), divisor));
+              const commitUrls = dataset.map(d => d.commit.url);
+              const avgValue = yValues.reduce((a, b) => a + b, 0) / yValues.length;
 
-            // Upper bound trace (invisible line, fills down to main)
-            const upperTrace = {
-              x: xLabels,
-              y: yUpper,
-              type: 'scatter',
-              mode: 'lines',
-              line: { width: 0 },
-              fill: 'tonexty',
-              fillcolor: fillColor,
-              showlegend: false,
-              hoverinfo: 'skip',
-            };
+              const hoverTexts = dataset.map((d, i) => {
+                const { bench } = d;
+                let text = '<b>' + testName.replace(/_/g, ' ') + '</b>: <b>' + yValues[i] + ' ' + scaledUnit + '</b>';
+                if (bench.range) {
+                  text += ' (\u00B1 ' + ranges[i] + ')';
+                }
+                if (bench.extra) {
+                  text += '<br>' + bench.extra;
+                }
+                return text;
+              });
+
+              metricTraces.push({
+                avgValue,
+                trace: {
+                  x: xLabels,
+                  y: yValues,
+                  type: 'scatter',
+                  mode: 'lines+markers',
+                  name: testName.replace(/_/g, ' '),
+                  line: { color: color, width: 2 },
+                  marker: { color: color, size: 5 },
+                  error_y: {
+                    type: 'data',
+                    array: ranges,
+                    visible: true,
+                    color: color,
+                    thickness: 1,
+                    width: 3,
+                  },
+                  text: hoverTexts,
+                  hoverinfo: 'text',
+                  customdata: commitUrls,
+                },
+              });
+            }
+
+            metricTraces.sort((a, b) => b.avgValue - a.avgValue);
+            for (const { trace } of metricTraces) {
+              traces.push(trace);
+            }
 
             const layout = {
-              title: { text: name, font: { size: 14 } },
+              title: { text: formatGroupName(groupName), font: { size: 16 } },
               xaxis: { title: 'commit' },
               yaxis: {
                 title: scaledUnit,
                 rangemode: 'tozero',
               },
-              hovermode: 'closest',
-              showlegend: false,
+              hovermode: 'x unified',
+              showlegend: true,
+              legend: {
+                orientation: 'h',
+                yanchor: 'top',
+                y: -0.2,
+                xanchor: 'center',
+                x: 0.5,
+              },
               margin: { t: 40, r: 20, b: 60, l: 80 },
             };
 
@@ -353,7 +410,7 @@
               displayModeBar: false,
             };
 
-            Plotly.newPlot(chartDiv, [lowerTrace, mainTrace, upperTrace], layout, config);
+            Plotly.newPlot(chartDiv, traces, layout, config);
 
             // Click handler: open commit URL
             chartDiv.on('plotly_click', function(eventData) {
@@ -365,7 +422,7 @@
             });
           }
 
-          function renderBenchSet(name, benchSet, main) {
+          function renderBenchSet(name, groupedMap, main) {
             const setElem = document.createElement('div');
             setElem.className = 'benchmark-set';
             main.appendChild(setElem);
@@ -379,8 +436,10 @@
             graphsElem.className = 'benchmark-graphs';
             setElem.appendChild(graphsElem);
 
-            for (const [benchName, benches] of benchSet.entries()) {
-              renderGraph(graphsElem, benchName, benches)
+            // Sort groups alphabetically
+            const sortedGroups = [...groupedMap.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+            for (const [groupName, testsMap] of sortedGroups) {
+              renderGroupedGraph(graphsElem, groupName, testsMap);
             }
           }
 
