@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1770673855422,
+  "lastUpdate": 1770678888406,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -1175,6 +1175,174 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2179223923,
             "range": "± 254191618",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "aa5439b673e57349f053e30ccefd3c3022691f01",
+          "message": "GH-25: Update dependency versions in Cargo.toml and Cargo.lock; bump Iceberg to latest commit (#61)",
+          "timestamp": "2026-02-10T02:40:09+04:00",
+          "tree_id": "91e7eebd7e2c692925267a0a8ea4b5e938938a4f",
+          "url": "https://github.com/icegatetech/icegate/commit/aa5439b673e57349f053e30ccefd3c3022691f01"
+        },
+        "date": 1770678888248,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 6922349,
+            "range": "± 208428",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 6722609,
+            "range": "± 94928",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 7081754,
+            "range": "± 123438",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 7094205,
+            "range": "± 34277",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 7380044,
+            "range": "± 56366",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 11946009,
+            "range": "± 214735",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 12295370,
+            "range": "± 50892",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 12431855,
+            "range": "± 137096",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 32534557,
+            "range": "± 567281",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 34807208,
+            "range": "± 530447",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 42074288,
+            "range": "± 461333",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 11688694,
+            "range": "± 45139",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 16105461,
+            "range": "± 120323",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 16310118,
+            "range": "± 286377",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 18064774,
+            "range": "± 81759",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 3627300914,
+            "range": "± 40216792",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 2005458591,
+            "range": "± 224791",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 6603501160,
+            "range": "± 10539877",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/with_grouping",
+            "value": 3604157146,
+            "range": "± 214978648",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/without_grouping",
+            "value": 3603587134,
+            "range": "± 211120023",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 991414,
+            "range": "± 15624",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2767772,
+            "range": "± 7939",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 997044,
+            "range": "± 4017",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2104249608,
+            "range": "± 221763759",
             "unit": "ns/iter"
           }
         ]
