@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1771203873199,
+  "lastUpdate": 1772036475901,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -2351,6 +2351,174 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1663029558,
             "range": "± 496967636",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a5a1d9ba6b4345d44bdb4d377f117fe53afbac62",
+          "message": "GH-71: Integrate WAL support into QueryEngine (#72)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Near‑real‑time WAL integration merging hot (WAL) and cold (Iceberg)\ndata for queries.\n* Per‑source query metrics and breakdowns (Iceberg vs WAL) surfaced and\nreported.\n* Optional IO read cache with lifecycle controls, sizing options, and\nexample configs.\n  * Configuration now requires a WAL base path.\n\n* **Bug Fixes**\n* Adjusted ingest/query service resource limits and improved\nlogging/OTel environment settings.\n\n* **Chores**\n  * Dependency updates and enhanced OpenTelemetry resource detection.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-02-25T19:22:57+04:00",
+          "tree_id": "c23c167e1a61948f898dc0e9bba96cabe53be39e",
+          "url": "https://github.com/icegatetech/icegate/commit/a5a1d9ba6b4345d44bdb4d377f117fe53afbac62"
+        },
+        "date": 1772036475647,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 7403941,
+            "range": "± 55091",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 7376611,
+            "range": "± 48080",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 7617349,
+            "range": "± 85923",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 7659102,
+            "range": "± 111981",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 7867833,
+            "range": "± 184567",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 12810540,
+            "range": "± 101918",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 13288886,
+            "range": "± 86153",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 13518267,
+            "range": "± 261705",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 34976467,
+            "range": "± 708366",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 37263381,
+            "range": "± 558210",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 44992155,
+            "range": "± 511158",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 12948987,
+            "range": "± 139491",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 17174957,
+            "range": "± 199513",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 17492658,
+            "range": "± 143423",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 19695967,
+            "range": "± 145041",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2411343030,
+            "range": "± 23713649",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 556714583,
+            "range": "± 2279071",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3011854446,
+            "range": "± 39257709",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/with_grouping",
+            "value": 2391088474,
+            "range": "± 30639481",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/without_grouping",
+            "value": 2415715010,
+            "range": "± 22926082",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 986596,
+            "range": "± 26282",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2776425,
+            "range": "± 7214",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 993256,
+            "range": "± 2285",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1691687661,
+            "range": "± 477224794",
             "unit": "ns/iter"
           }
         ]
