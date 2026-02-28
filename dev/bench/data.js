@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1772321437793,
+  "lastUpdate": 1772322375009,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -3191,6 +3191,174 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1643236492,
             "range": "± 511302558",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgenii Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgenii Mineev",
+            "username": "frisbeeman"
+          },
+          "distinct": true,
+          "id": "a2908eb51855a0f3e84ea15d97adfb80188a4ce5",
+          "message": "Remove CI gate job from release workflow\n\nThere are commit checks",
+          "timestamp": "2026-03-01T00:01:29+01:00",
+          "tree_id": "63615e39c1f13f2e06616ba12e707e303461b683",
+          "url": "https://github.com/icegatetech/icegate/commit/a2908eb51855a0f3e84ea15d97adfb80188a4ce5"
+        },
+        "date": 1772322374509,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 9958998,
+            "range": "± 363126",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 9536458,
+            "range": "± 249955",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 10274134,
+            "range": "± 180421",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 10183426,
+            "range": "± 187810",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 10720522,
+            "range": "± 231755",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 15204046,
+            "range": "± 204728",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 16014468,
+            "range": "± 373303",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 15887945,
+            "range": "± 348998",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 37639458,
+            "range": "± 1214423",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 40670698,
+            "range": "± 551274",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 47098638,
+            "range": "± 526239",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 14858103,
+            "range": "± 574658",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 21510915,
+            "range": "± 897392",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 21714676,
+            "range": "± 538737",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 22633089,
+            "range": "± 576564",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2322388068,
+            "range": "± 27877464",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 582346946,
+            "range": "± 22214883",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3022604136,
+            "range": "± 47559903",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/with_grouping",
+            "value": 2353496903,
+            "range": "± 44362995",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/without_grouping",
+            "value": 2316257670,
+            "range": "± 56154139",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1091248,
+            "range": "± 19086",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3021584,
+            "range": "± 41707",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1102593,
+            "range": "± 11753",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1682843699,
+            "range": "± 511538611",
             "unit": "ns/iter"
           }
         ]
