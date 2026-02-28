@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1772289653184,
+  "lastUpdate": 1772319230729,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -2855,6 +2855,174 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1605121851,
             "range": "± 501536120",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "61b99bd8148005d5a5cffee5ad32e364319598cf",
+          "message": "GH-76: Add Helm chart for IceGate (#79)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Added Helm chart to simplify IceGate deployment on Kubernetes, with\nconfigurable Query, Ingest, and Migrate components and sane defaults.\n* Chart includes helpful post-install notes showing port-forward\ncommands and install guidance.\n\n* **Chores**\n  * CI now validates Helm charts (lint + template) as part of checks.\n* Release pipeline publishes the Helm chart to the container registry\nand includes chart info in release notes.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-03-01T02:09:42+04:00",
+          "tree_id": "a373db396d040de2d0716c01b0e1a01f77ad9c69",
+          "url": "https://github.com/icegatetech/icegate/commit/61b99bd8148005d5a5cffee5ad32e364319598cf"
+        },
+        "date": 1772319230473,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 10599172,
+            "range": "± 223615",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 9889053,
+            "range": "± 118170",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 10570642,
+            "range": "± 449021",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 10358687,
+            "range": "± 70512",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 10584681,
+            "range": "± 86187",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 14632854,
+            "range": "± 139704",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 15125056,
+            "range": "± 59879",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 15683051,
+            "range": "± 70649",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 37006573,
+            "range": "± 718752",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 39730034,
+            "range": "± 878059",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 47567721,
+            "range": "± 555415",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 15197056,
+            "range": "± 135723",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 19717895,
+            "range": "± 191373",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 19883151,
+            "range": "± 175278",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 21715902,
+            "range": "± 115864",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2257867591,
+            "range": "± 33810385",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 586832470,
+            "range": "± 21631530",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3020859783,
+            "range": "± 34319572",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/with_grouping",
+            "value": 2266247075,
+            "range": "± 39102497",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/without_grouping",
+            "value": 2253369124,
+            "range": "± 43743221",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1088204,
+            "range": "± 23495",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2988256,
+            "range": "± 6862",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1092830,
+            "range": "± 4683",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1666575222,
+            "range": "± 509157297",
             "unit": "ns/iter"
           }
         ]
