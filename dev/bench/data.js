@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1772322375009,
+  "lastUpdate": 1772324433022,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -3359,6 +3359,174 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1682843699,
             "range": "± 511538611",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgenii Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgenii Mineev",
+            "username": "frisbeeman"
+          },
+          "distinct": true,
+          "id": "d56f2afaa2af6e3e2f2d4048a077bb48f30d00ac",
+          "message": "Refactor release workflow and Docker bake configuration to use centralized builder target and runtime inheritance",
+          "timestamp": "2026-03-01T00:36:28+01:00",
+          "tree_id": "5ade5a7a380167f6cd353f52ed31199b884a789d",
+          "url": "https://github.com/icegatetech/icegate/commit/d56f2afaa2af6e3e2f2d4048a077bb48f30d00ac"
+        },
+        "date": 1772324432718,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 10147431,
+            "range": "± 190359",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 9565604,
+            "range": "± 154010",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 10363991,
+            "range": "± 113822",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 10306079,
+            "range": "± 113235",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 10622481,
+            "range": "± 196711",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 14801970,
+            "range": "± 145197",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 15306047,
+            "range": "± 172279",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 16121078,
+            "range": "± 144249",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 37259983,
+            "range": "± 549901",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 39214340,
+            "range": "± 558029",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 47259088,
+            "range": "± 682810",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 15435469,
+            "range": "± 119820",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 20060853,
+            "range": "± 117686",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 20341542,
+            "range": "± 138636",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 22303215,
+            "range": "± 125534",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2213223200,
+            "range": "± 13203382",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 579245716,
+            "range": "± 21483287",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3002334317,
+            "range": "± 37591801",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/with_grouping",
+            "value": 2229063331,
+            "range": "± 27009011",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/without_grouping",
+            "value": 2216411928,
+            "range": "± 26346184",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1088891,
+            "range": "± 13317",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2998072,
+            "range": "± 12577",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1094344,
+            "range": "± 4144",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1628877448,
+            "range": "± 515655583",
             "unit": "ns/iter"
           }
         ]
