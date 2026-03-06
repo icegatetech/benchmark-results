@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1772326241041,
+  "lastUpdate": 1772806219361,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -3863,6 +3863,174 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1647925776,
             "range": "± 519433731",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "31987c5c597fc5c0f90079ed6151220d1c20aa02",
+          "message": "GH-76: Docker image and Helm chart release pipeline  (#80)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Three Docker image targets (query, ingest, maintain) with bake-based\nbuild/publish and SemVer tag validation.\n* Kustomize overlays plus Kubernetes namespaces, secrets, and Helm\nvalues for full-stack deployment.\n\n* **Improvements**\n* Streamlined release workflow deriving version from tags; unified\nDocker/Helm steps and cross-architecture container builds.\n* Helm enhancements: namespace helper, optional namespace creation,\nserviceaccount hooks, and migrate wait-for-dependencies.\n\n* **Dependencies**\n  * Updated Iceberg-related dependencies to newer revisions.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-03-06T17:12:09+04:00",
+          "tree_id": "a9751d16ef332ded378c19a379850bd222b0e356",
+          "url": "https://github.com/icegatetech/icegate/commit/31987c5c597fc5c0f90079ed6151220d1c20aa02"
+        },
+        "date": 1772806219093,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 10355138,
+            "range": "± 254674",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 9468728,
+            "range": "± 124168",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 10192702,
+            "range": "± 129129",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 10136119,
+            "range": "± 187144",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 10245722,
+            "range": "± 71863",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 14364855,
+            "range": "± 52946",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 14896014,
+            "range": "± 241233",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 15221087,
+            "range": "± 69776",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 36501824,
+            "range": "± 626694",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 38899523,
+            "range": "± 563053",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 46573674,
+            "range": "± 433191",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 14539095,
+            "range": "± 351005",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 19163702,
+            "range": "± 76614",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 19269945,
+            "range": "± 177004",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 21270145,
+            "range": "± 107580",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2377714031,
+            "range": "± 61664085",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 565188615,
+            "range": "± 7083818",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3006658138,
+            "range": "± 46995819",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/with_grouping",
+            "value": 2403772933,
+            "range": "± 37676538",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/without_grouping",
+            "value": 2427975573,
+            "range": "± 43288738",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1053282,
+            "range": "± 22902",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2898203,
+            "range": "± 8543",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1057453,
+            "range": "± 3331",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1701358409,
+            "range": "± 500294567",
             "unit": "ns/iter"
           }
         ]
