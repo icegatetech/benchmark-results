@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1772836257701,
+  "lastUpdate": 1772843217283,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -4199,6 +4199,174 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1676883003,
             "range": "± 524244878",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "565ad0edf4fae252d420ace68948aa20419c77f8",
+          "message": "GH-8: Refactor ``*_over_time` aggregation planing. (#81)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n* Simplified cache configuration by removing the per-object size limit\nto reduce config surface.\n\n* **New Features**\n  * Added a GridAgg UDAF for grid-based bucketed range aggregations.\n  * Exposed new grid utilities for computing and matching grid points.\n\n* **Improvements**\n* Planner switched to GridAgg-based range aggregation with improved\ngrouping and attribute handling.\n* QueryContext gains a configurable max-grid-points limit (default\nadded).\n\n* **Tests**\n* Expanded tests to validate GridAgg, date-grid utilities, and planner\nbehavior.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-03-07T03:43:07+04:00",
+          "tree_id": "aa8b593c4b3884f1598f83ab861fe73bcb314c94",
+          "url": "https://github.com/icegatetech/icegate/commit/565ad0edf4fae252d420ace68948aa20419c77f8"
+        },
+        "date": 1772843217101,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 10494865,
+            "range": "± 262023",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 9703031,
+            "range": "± 93085",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 10172601,
+            "range": "± 346463",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 10105601,
+            "range": "± 94805",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 10427463,
+            "range": "± 84375",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 12412454,
+            "range": "± 199440",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 12323203,
+            "range": "± 209911",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 13265363,
+            "range": "± 215219",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 27629914,
+            "range": "± 184041",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 28089624,
+            "range": "± 409594",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 27832626,
+            "range": "± 164905",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 12026073,
+            "range": "± 268929",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 12788957,
+            "range": "± 83207",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 14088456,
+            "range": "± 48489",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 18086182,
+            "range": "± 138432",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2289305372,
+            "range": "± 10825685",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 563027165,
+            "range": "± 20021741",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2970559245,
+            "range": "± 56021293",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/with_grouping",
+            "value": 2254169660,
+            "range": "± 31218985",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/without_grouping",
+            "value": 2254068344,
+            "range": "± 21170265",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1061707,
+            "range": "± 27715",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2932797,
+            "range": "± 16476",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1058163,
+            "range": "± 5312",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1629807205,
+            "range": "± 507519234",
             "unit": "ns/iter"
           }
         ]
