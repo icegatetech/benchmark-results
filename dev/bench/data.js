@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1773070888936,
+  "lastUpdate": 1773266386469,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -4535,6 +4535,174 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1679990238,
             "range": "± 524861464",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e72cf8726d90ec0d1c55ed98a767ba1e3890c03e",
+          "message": "GH-85: parallel segment reading in Shifter (#86)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Configurable parallelism for segment and plan reads to improve\ningestion throughput.\n\n* **Configuration**\n* Two new settings for plan and shift segment read parallelism\n(defaults: 8).\n  * Validation now rejects zero values.\n\n* **Bug Fixes**\n  * Fixed path-parameter syntax for several HTTP routes.\n\n* **Tests**\n* Extensive integration tests for parallel vs. sequential reads,\nconcurrency, and failure modes.\n\n* **Chores**\n  * Dependency updates and audit configuration adjustments.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-03-12T00:59:12+04:00",
+          "tree_id": "6bec495cf75469f2843e20b9e7f4eecbbd7aaa0e",
+          "url": "https://github.com/icegatetech/icegate/commit/e72cf8726d90ec0d1c55ed98a767ba1e3890c03e"
+        },
+        "date": 1773266385919,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 10134571,
+            "range": "± 103006",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 9920332,
+            "range": "± 223513",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 10407875,
+            "range": "± 228894",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 10145744,
+            "range": "± 119420",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 10544601,
+            "range": "± 151978",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 12186797,
+            "range": "± 131706",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 12460835,
+            "range": "± 133695",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 13584182,
+            "range": "± 174533",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 28135895,
+            "range": "± 306326",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 28529758,
+            "range": "± 353548",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 28032190,
+            "range": "± 432240",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 12895233,
+            "range": "± 324870",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 13124839,
+            "range": "± 96564",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 14642742,
+            "range": "± 292848",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 18558471,
+            "range": "± 160712",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2253812580,
+            "range": "± 32080439",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 578459956,
+            "range": "± 22821668",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3015077239,
+            "range": "± 53491080",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/with_grouping",
+            "value": 2303859761,
+            "range": "± 32131352",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/without_grouping",
+            "value": 2278773527,
+            "range": "± 29898604",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1095882,
+            "range": "± 23814",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3044982,
+            "range": "± 7954",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1106943,
+            "range": "± 8085",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1703123127,
+            "range": "± 502695933",
             "unit": "ns/iter"
           }
         ]
