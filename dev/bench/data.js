@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1773266386469,
+  "lastUpdate": 1773665303210,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -4703,6 +4703,174 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1703123127,
             "range": "± 502695933",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9eb3008bdb2860ed03cba41171ac7b1b21cb1609",
+          "message": "GH-87: Refactor WAL handling (#88)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Dependency wait/init support via a reusable Helm helper for\ndeployments, jobs and pods.\n* Centralized queue-based WAL handling for query/ingest with shared\nqueue configuration.\n* New Skaffold configs, Kustomize overlays, Helm values and sample\nsecrets for multiple deployment targets.\n\n* **Configuration**\n  * Docker build emits additional bake-file annotations.\n* Added Parquet metadata prefetch and waitForDependencies knobs\n(configurable).\n\n* **Documentation**\n  * Added Kustomize deployment guide; fixed Quick Start typo.\n\n* **Chores**\n* Grafana dashboard sync script and assorted kustomize/helm manifest\nupdates.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-03-16T16:03:51+04:00",
+          "tree_id": "cafd8eefa8496ad4c0956d8c313546dd1f8d5780",
+          "url": "https://github.com/icegatetech/icegate/commit/9eb3008bdb2860ed03cba41171ac7b1b21cb1609"
+        },
+        "date": 1773665302879,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 10339521,
+            "range": "± 203715",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 10173735,
+            "range": "± 105349",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 10966549,
+            "range": "± 127031",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 10789008,
+            "range": "± 597854",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 10652543,
+            "range": "± 193183",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 12612533,
+            "range": "± 183255",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 12751421,
+            "range": "± 51908",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 13854443,
+            "range": "± 230760",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 28680552,
+            "range": "± 264903",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 28884854,
+            "range": "± 186292",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 29243448,
+            "range": "± 348892",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 12726302,
+            "range": "± 257117",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 13796642,
+            "range": "± 213104",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 14594721,
+            "range": "± 374989",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 19327674,
+            "range": "± 281527",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2292217848,
+            "range": "± 35784927",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 600504221,
+            "range": "± 22779589",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3007838930,
+            "range": "± 68734991",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/with_grouping",
+            "value": 2304526456,
+            "range": "± 67578070",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_grouping/without_grouping",
+            "value": 2279064387,
+            "range": "± 25689431",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1108082,
+            "range": "± 19460",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3031896,
+            "range": "± 16377",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1110936,
+            "range": "± 3509",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1668401707,
+            "range": "± 527196091",
             "unit": "ns/iter"
           }
         ]
