@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1773847072403,
+  "lastUpdate": 1774400122620,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -5039,6 +5039,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1698159803,
             "range": "± 507380052",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "00444dc0c2f38903a5ca3db73e42b1bdfcc50afa",
+          "message": "GH-91: Refactor IO cache to support prefetch (#92)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Configurable IO cache controls (stat TTL, max write-cache size),\nParquet metadata prefetching, unified S3/s3a storage backend and\nreusable storage factory.\n* Query engine background catalog refresh with configurable\nrefresh/max-age.\n\n* **Improvements**\n  * Exposed cache/prefetch metrics and earlier metrics initialization.\n* Write buffering limits, faster queue writer conflict probing, and\nremoval of write-grouping.\n* Helm/Kustomize/Grafana/Prometheus value updates and increased resource\nrequests; optional ingest/query cache enablement.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-03-25T03:54:39+04:00",
+          "tree_id": "073626e4a6c6a7c5138526ee5d69f7a452665e29",
+          "url": "https://github.com/icegatetech/icegate/commit/00444dc0c2f38903a5ca3db73e42b1bdfcc50afa"
+        },
+        "date": 1774400122123,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1846952,
+            "range": "± 53488",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 3165582,
+            "range": "± 689968",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 3208599,
+            "range": "± 40080",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 3370627,
+            "range": "± 56500",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 3589962,
+            "range": "± 108465",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5431454,
+            "range": "± 733152",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 7239286,
+            "range": "± 44278",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 7754677,
+            "range": "± 113909",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7233779,
+            "range": "± 7188187",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 24087718,
+            "range": "± 223241",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 24396219,
+            "range": "± 45759",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5644355,
+            "range": "± 924999",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 10743987,
+            "range": "± 141130",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 11913626,
+            "range": "± 163826",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 13607812,
+            "range": "± 208503",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2375556592,
+            "range": "± 11264950",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 556140534,
+            "range": "± 2344792",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2945998737,
+            "range": "± 37690840",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 892038,
+            "range": "± 9456",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2684563,
+            "range": "± 16594",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 899975,
+            "range": "± 8717",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1656432740,
+            "range": "± 457977366",
             "unit": "ns/iter"
           }
         ]
