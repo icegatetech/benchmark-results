@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1774400122620,
+  "lastUpdate": 1775387344807,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -5195,6 +5195,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1656432740,
             "range": "± 457977366",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "5c7a0015f7224eecfb6c09c5c8799cde107427a7",
+          "message": "GH-46: Add AWS S3Tables overlay for IceGate deployment (#98)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n  * Added AWS S3Tables support for Iceberg catalog storage.\n* Introduced IceGate deployment with Query and Ingest components\nenabled.\n* Enabled observability: Prometheus, Loki, and distributed tracing\nintegration.\n  * Configured Tailscale exposure for relevant services.\n* Added credentials secret and deployment values to support AWS S3\nusage.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-04-05T14:09:30+04:00",
+          "tree_id": "8bc8f6b268dc879a5525d8bd9761151d628f0498",
+          "url": "https://github.com/icegatetech/icegate/commit/5c7a0015f7224eecfb6c09c5c8799cde107427a7"
+        },
+        "date": 1775387344304,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1747341,
+            "range": "± 19558",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 3038557,
+            "range": "± 524637",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 3086501,
+            "range": "± 54694",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 3153576,
+            "range": "± 165571",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 3439723,
+            "range": "± 9606",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5124715,
+            "range": "± 601347",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 6692500,
+            "range": "± 31715",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 7042331,
+            "range": "± 36581",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6900675,
+            "range": "± 6334417",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 22123921,
+            "range": "± 247755",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 22098682,
+            "range": "± 90183",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5231484,
+            "range": "± 812725",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 9859588,
+            "range": "± 118206",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 11186255,
+            "range": "± 110550",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 12958109,
+            "range": "± 112186",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2376329637,
+            "range": "± 74019067",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 558096569,
+            "range": "± 2208756",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2976547931,
+            "range": "± 50522347",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1045790,
+            "range": "± 16597",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2962122,
+            "range": "± 30190",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1050315,
+            "range": "± 8165",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1663884969,
+            "range": "± 514338769",
             "unit": "ns/iter"
           }
         ]
