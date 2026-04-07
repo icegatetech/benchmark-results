@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1775387344807,
+  "lastUpdate": 1775596392640,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -5351,6 +5351,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1663884969,
             "range": "± 514338769",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e36602b322676ceff2811776eb9fcd412497e592",
+          "message": "GH-95: Ingest optimisation (#102)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **Performance Improvements**\n* Linux builds now use a faster allocator; Docker build is simplified;\ningest memory defaults reduced.\n\n* **Reliability Enhancements**\n* Retry and backoff added for S3 bucket creation; improved WAL write/ack\nhandling and retry semantics.\n* Log ingestion now uses a pre-sort + WAL pipeline with better error\nmapping and metrics.\n\n* **Configuration Updates**\n  * Increased default WAL row-group size for queues.\n\n* **Documentation**\n  * Clarified struct/impl grouping guidance in Rust docs.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->\n\n---------\n\nCo-authored-by: Evgenii Mineev <e.v.mineev@gmail.com>",
+          "timestamp": "2026-04-08T00:14:06+04:00",
+          "tree_id": "83ee1cafdac819ba540f2c48be5f73e73e2ec747",
+          "url": "https://github.com/icegatetech/icegate/commit/e36602b322676ceff2811776eb9fcd412497e592"
+        },
+        "date": 1775596392439,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1731910,
+            "range": "± 44929",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 3018750,
+            "range": "± 528589",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 3036897,
+            "range": "± 19539",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 3105610,
+            "range": "± 12778",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 3398149,
+            "range": "± 16363",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5056774,
+            "range": "± 614169",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 6714938,
+            "range": "± 47554",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 7026611,
+            "range": "± 26830",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6921358,
+            "range": "± 6775243",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 23076086,
+            "range": "± 426144",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 23315781,
+            "range": "± 212500",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5258119,
+            "range": "± 740566",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 9794309,
+            "range": "± 44677",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 11093110,
+            "range": "± 88356",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 12816829,
+            "range": "± 31270",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2271496891,
+            "range": "± 29107531",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 506188958,
+            "range": "± 4823632",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2950152828,
+            "range": "± 40678694",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1012705,
+            "range": "± 11953",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2829310,
+            "range": "± 7495",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1016560,
+            "range": "± 3712",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1662711787,
+            "range": "± 491305607",
             "unit": "ns/iter"
           }
         ]
