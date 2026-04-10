@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1775596392640,
+  "lastUpdate": 1775857533780,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -5507,6 +5507,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1662711787,
             "range": "± 491305607",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "578a6b2b187c049004f50ff32be15a5d4b210695",
+          "message": "GH-94: Remove example configurations and refactor metadata caching logic in query engine and WAL reader (#96)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n  * Optional inclusion of WAL (hot) segments in query results\n  * New CPU throttling & scheduling panels in monitoring dashboard\n  * Fast metadata-only label discovery for Loki endpoints\n\n* **Performance Improvements**\n  * Parquet metadata caching to reduce object-store round-trips\n\n* **Configuration**\n  * New engine options to enable WAL queries and set metadata-size hints\n* Configurable metadata cache capacity and prefetch default toggled off\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-04-11T00:45:32+04:00",
+          "tree_id": "0b2874b1ad912b95090b9bf288a17befa0d3ed79",
+          "url": "https://github.com/icegatetech/icegate/commit/578a6b2b187c049004f50ff32be15a5d4b210695"
+        },
+        "date": 1775857533589,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1948834,
+            "range": "± 62887",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 3143056,
+            "range": "± 540307",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 3135433,
+            "range": "± 31527",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 3188377,
+            "range": "± 60264",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 3466063,
+            "range": "± 20872",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4959629,
+            "range": "± 716264",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 7160407,
+            "range": "± 344575",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 7122023,
+            "range": "± 199107",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6865646,
+            "range": "± 6693382",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 22690926,
+            "range": "± 146393",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 23021071,
+            "range": "± 604533",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5116493,
+            "range": "± 826258",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 9885724,
+            "range": "± 89680",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 11820153,
+            "range": "± 193969",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 13876519,
+            "range": "± 197914",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2427848488,
+            "range": "± 28934758",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 505336200,
+            "range": "± 1219422",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2957929338,
+            "range": "± 18960910",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1022788,
+            "range": "± 16544",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2856736,
+            "range": "± 15580",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1023230,
+            "range": "± 6030",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1696473683,
+            "range": "± 493267031",
             "unit": "ns/iter"
           }
         ]
