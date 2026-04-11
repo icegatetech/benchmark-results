@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1775857533780,
+  "lastUpdate": 1775922951130,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -5663,6 +5663,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1696473683,
             "range": "± 493267031",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "586a8950d055248ba01a4908ee0061bd19a93b5f",
+          "message": "GH-46: Refactor IceGate configurations (#104)\n\n- use placeholders for sensitive S3 details\n- update endpoints to internal DNS\n- standardize resource settings\n- bump chart version to future `0.1.0`.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n* **New Features**\n* Added query caching (memory and disk) with configurable TTL and sizing\nfor improved performance\n  * Enabled WAL-backed querying support\n\n* **Chores**\n* Upgraded icegate Helm chart to 0.1.0 release version across multiple\ndeployment overlays\n* Updated service endpoints to use Kubernetes cluster-local DNS naming\nconventions\n* Parameterized hardcoded configuration values for improved deployment\nportability\n  * Updated MinIO image and metrics monitoring configuration\n  * Adjusted resource allocations for query and ingest services\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-04-11T19:15:50+04:00",
+          "tree_id": "5cf01ad0f89a0d17726b8c74f7b09f98d7f66c78",
+          "url": "https://github.com/icegatetech/icegate/commit/586a8950d055248ba01a4908ee0061bd19a93b5f"
+        },
+        "date": 1775922950661,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1855538,
+            "range": "± 63201",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 3097041,
+            "range": "± 24262",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 3152932,
+            "range": "± 49424",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 3197570,
+            "range": "± 6354",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 3474346,
+            "range": "± 8584",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5168317,
+            "range": "± 586726",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 6688041,
+            "range": "± 27418",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 7021682,
+            "range": "± 50165",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7002108,
+            "range": "± 6257060",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 21770134,
+            "range": "± 321842",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 22579750,
+            "range": "± 371073",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5166888,
+            "range": "± 810122",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 9977975,
+            "range": "± 102158",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 11315846,
+            "range": "± 308879",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 13545800,
+            "range": "± 81224",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2320956863,
+            "range": "± 32125312",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 504292257,
+            "range": "± 475692",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2909236280,
+            "range": "± 42669438",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1033084,
+            "range": "± 14238",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2970613,
+            "range": "± 12035",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1035756,
+            "range": "± 8838",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1663578393,
+            "range": "± 505152487",
             "unit": "ns/iter"
           }
         ]
