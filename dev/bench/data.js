@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1776081900722,
+  "lastUpdate": 1776295425938,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -5975,6 +5975,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1624737775,
             "range": "± 495911476",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e7ea7980c43e868b81d294d939ccaa6b7af5a311",
+          "message": "GH-108: Add demo logging to all services (#112)\n\n- introduce OTEL collector for log processing\n- and configure JSON-based structured logging across the stack\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Added an OpenTelemetry Collector for centralized log collection\n(node-level collector + service)\n  * Configured all demo services to forward logs to the collector\n* Integrated a Loki (demo) datasource in Grafana and made it the default\nfor logs\n* Enabled JSON-formatted structured logging across components for\nricher, machine-readable logs\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-04-16T02:23:39+04:00",
+          "tree_id": "5d83b79c1c7c159be9acb017285b49d54d7eba58",
+          "url": "https://github.com/icegatetech/icegate/commit/e7ea7980c43e868b81d294d939ccaa6b7af5a311"
+        },
+        "date": 1776295425384,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1745479,
+            "range": "± 19518",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 3035756,
+            "range": "± 601792",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 3082049,
+            "range": "± 48576",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 3184674,
+            "range": "± 27823",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 3418397,
+            "range": "± 35604",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5108788,
+            "range": "± 665930",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 6727770,
+            "range": "± 62959",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 7050770,
+            "range": "± 117538",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6915387,
+            "range": "± 6429419",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 21585119,
+            "range": "± 211605",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 22118940,
+            "range": "± 340682",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5234050,
+            "range": "± 835899",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 10014337,
+            "range": "± 226598",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 11395525,
+            "range": "± 422421",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 12934265,
+            "range": "± 116195",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2366475333,
+            "range": "± 30188082",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 504086111,
+            "range": "± 567846",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2922147125,
+            "range": "± 48977676",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1002014,
+            "range": "± 17357",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2864014,
+            "range": "± 20781",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1008515,
+            "range": "± 11223",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1666035889,
+            "range": "± 481826849",
             "unit": "ns/iter"
           }
         ]
