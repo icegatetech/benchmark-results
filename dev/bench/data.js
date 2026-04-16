@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1776376160816,
+  "lastUpdate": 1776378327087,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -6599,6 +6599,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1268731670,
             "range": "± 48045948",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgenii Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgenii Mineev",
+            "username": "frisbeeman"
+          },
+          "distinct": true,
+          "id": "1d422093e71c76aa84ccd453bda159385eeea7c3",
+          "message": "(style) Refactor `parse_time` to simplify error handling logic with RFC3339 parsing",
+          "timestamp": "2026-04-16T23:53:59+02:00",
+          "tree_id": "369c7c8e14bba9217524dee696cd9418e1666fa2",
+          "url": "https://github.com/icegatetech/icegate/commit/1d422093e71c76aa84ccd453bda159385eeea7c3"
+        },
+        "date": 1776378326781,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2144748,
+            "range": "± 52197",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2077785,
+            "range": "± 24206",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2057017,
+            "range": "± 24501",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2169059,
+            "range": "± 17119",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2189251,
+            "range": "± 10193",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5246548,
+            "range": "± 22377",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5386377,
+            "range": "± 15689",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5669276,
+            "range": "± 35140",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7058124,
+            "range": "± 50597",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 7074262,
+            "range": "± 62727",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 7190295,
+            "range": "± 98011",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5509047,
+            "range": "± 81219",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7983725,
+            "range": "± 42172",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7913337,
+            "range": "± 73220",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10756133,
+            "range": "± 49926",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2279137249,
+            "range": "± 102821237",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 501559080,
+            "range": "± 241216",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2879589725,
+            "range": "± 38780215",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1039761,
+            "range": "± 10938",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3048865,
+            "range": "± 67536",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1042850,
+            "range": "± 18508",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1312082123,
+            "range": "± 37915795",
             "unit": "ns/iter"
           }
         ]
