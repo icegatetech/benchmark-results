@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1777722997012,
+  "lastUpdate": 1777729951626,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -7223,6 +7223,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1277021155,
             "range": "± 41081972",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b671fdd08e5bab03711b9f96f4ada597d5e40422",
+          "message": "GH-119: Tempo endpoint with TraceQL query (#123)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Full Tempo API: trace lookup, search, tag discovery/tag-values (v1 &\nv2) with JSON/proto responses and validation.\n* TraceQL: new query language for trace search and metrics (parser,\nplanner, execution).\n* Grafana: demo Loki/Tempo datasources with trace↔log cross-links and\n“View trace” links.\n\n* **Storage & Query Improvements**\n* Split span attributes into resource vs span maps; improved tag\ndiscovery via Parquet metadata.\n  * Parquet bloom-filter support for faster lookups.\n\n* **Chores**\n* OTLP HTTP: configurable max body size enforced (over-limit requests\nreturn 413).\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-05-02T17:27:17+04:00",
+          "tree_id": "75af27cdb518478d6c6a585508277fa94ebbc9e2",
+          "url": "https://github.com/icegatetech/icegate/commit/b671fdd08e5bab03711b9f96f4ada597d5e40422"
+        },
+        "date": 1777729951347,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2045286,
+            "range": "± 29635",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2127730,
+            "range": "± 10628",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2102010,
+            "range": "± 32116",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2184702,
+            "range": "± 24712",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2271247,
+            "range": "± 15510",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5488989,
+            "range": "± 91705",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5610549,
+            "range": "± 103991",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5907065,
+            "range": "± 134124",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7347443,
+            "range": "± 126620",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 7551268,
+            "range": "± 92143",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 7528237,
+            "range": "± 87212",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5868172,
+            "range": "± 76918",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 8716997,
+            "range": "± 62696",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 8485599,
+            "range": "± 105691",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10980585,
+            "range": "± 193782",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2229611355,
+            "range": "± 36168023",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 501501456,
+            "range": "± 180039",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2854435312,
+            "range": "± 45522652",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1045353,
+            "range": "± 8210",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2997594,
+            "range": "± 28160",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1037956,
+            "range": "± 6369",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1262411456,
+            "range": "± 50976777",
             "unit": "ns/iter"
           }
         ]
