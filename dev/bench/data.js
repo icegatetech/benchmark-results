@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1776632142556,
+  "lastUpdate": 1777722997012,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -7067,6 +7067,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1301559425,
             "range": "± 40503673",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "42ddca9c042d1425a0876318310fce1b9032311f",
+          "message": "GH-111: Add S3 Iceberg Catalog base implementation (#122)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Added S3-backed Iceberg catalog support with atomic commits via\nobject-store versioning; configurable bucket/region/endpoint/credentials\nand codec option.\n\n* **Documentation**\n* Added component docs detailing S3 catalog architecture, storage\nlayout, usage notes, and development status.\n\n* **Tests**\n* Large integration and unit test suites added to validate transactions,\nconcurrency, storage semantics, and config validation.\n\n* **Chores**\n* Added new workspace crate for the S3 catalog and updated security\naudit and testing guidelines.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-05-02T15:26:34+04:00",
+          "tree_id": "1234f8ab98a29a1b304a97bc573261d077c626e9",
+          "url": "https://github.com/icegatetech/icegate/commit/42ddca9c042d1425a0876318310fce1b9032311f"
+        },
+        "date": 1777722996819,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2079131,
+            "range": "± 51988",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2027816,
+            "range": "± 5410",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2006211,
+            "range": "± 10063",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2100061,
+            "range": "± 7474",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2154213,
+            "range": "± 7050",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5223234,
+            "range": "± 6721",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5357200,
+            "range": "± 8347",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5616729,
+            "range": "± 6110",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7000813,
+            "range": "± 13834",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 7001724,
+            "range": "± 7513",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6999286,
+            "range": "± 8647",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5307834,
+            "range": "± 5640",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7672851,
+            "range": "± 5112",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7676180,
+            "range": "± 5152",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10383772,
+            "range": "± 9437",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2253768272,
+            "range": "± 36904338",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 501233386,
+            "range": "± 208063",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2828630415,
+            "range": "± 45757681",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 980821,
+            "range": "± 7467",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2788260,
+            "range": "± 11912",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 983246,
+            "range": "± 4921",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1277021155,
+            "range": "± 41081972",
             "unit": "ns/iter"
           }
         ]
