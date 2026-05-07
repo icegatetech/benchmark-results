@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1778074525055,
+  "lastUpdate": 1778119091515,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -7535,6 +7535,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1254332380,
             "range": "± 41888662",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "98e67a3affad8408ff646c5ec726c31bcd3bc3a4",
+          "message": "GH-135: Store `trace_id`, `span_id`, and `parent_span_id` as `FixedSizeBinary` (#136)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n  * Added cAdvisor DaemonSet for container metrics collection\n\n* **Configuration**\n  * Increased default row-group size to 20,000\n  * Added configurable Parquet data page size limit for writes\n  * Per-column Parquet encoding overrides and writer tuning enabled\n\n* **Schema Changes**\n* Trace/span IDs switched to fixed-length binary storage (fixed-size\nbytes)\n* Query/formatters/export paths updated to handle and hex-encode\nfixed-size IDs where needed\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-05-07T05:45:02+04:00",
+          "tree_id": "5340422ef4ce244982fa097dcb6d488410d0e0eb",
+          "url": "https://github.com/icegatetech/icegate/commit/98e67a3affad8408ff646c5ec726c31bcd3bc3a4"
+        },
+        "date": 1778119091324,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2007619,
+            "range": "± 20311",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2092987,
+            "range": "± 14543",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2059111,
+            "range": "± 21377",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2143301,
+            "range": "± 8516",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2201528,
+            "range": "± 4828",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5509781,
+            "range": "± 98813",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5557645,
+            "range": "± 55255",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5908800,
+            "range": "± 50193",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7566746,
+            "range": "± 137187",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 7446812,
+            "range": "± 87505",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 7140572,
+            "range": "± 140948",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5445122,
+            "range": "± 39270",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7746861,
+            "range": "± 44902",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7788522,
+            "range": "± 52687",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10614600,
+            "range": "± 47494",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2204932745,
+            "range": "± 84974441",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 501368938,
+            "range": "± 276237",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2879207831,
+            "range": "± 31456491",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1038501,
+            "range": "± 5883",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2940894,
+            "range": "± 14464",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1034530,
+            "range": "± 15392",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1278839040,
+            "range": "± 68501772",
             "unit": "ns/iter"
           }
         ]
