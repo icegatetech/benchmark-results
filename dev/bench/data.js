@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1779061220212,
+  "lastUpdate": 1780531227263,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -7847,6 +7847,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1353474349,
             "range": "± 45873549",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d332345ce99f25a1509aec99d380652006ea10bd",
+          "message": "feat: Add Flight SQL integration with read-only server (#143)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Added Apache Arrow Flight SQL gRPC query endpoint (configurable,\ndefault port 8815; disabled by default). Read-only queries with\nper-request tenant isolation via the x-scope-orgid header.\n\n* **Documentation**\n* Added user-facing Flight SQL docs, examples, client guidance, and\ncaveats in README and crate docs.\n\n* **Tests**\n* Added integration, smoke, metadata, read-only, and tenant-isolation\ntests and a Flight SQL test harness.\n\n* **Chores**\n* Installed Protobuf tooling in CI and Docker; added\nchart/values/templates, configs, and manifest/dependency updates to\nenable Flight SQL.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-06-04T03:28:36+04:00",
+          "tree_id": "2b1635a5363d8520e0727361c51434483064a4cc",
+          "url": "https://github.com/icegatetech/icegate/commit/d332345ce99f25a1509aec99d380652006ea10bd"
+        },
+        "date": 1780531226980,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1979388,
+            "range": "± 34905",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2067601,
+            "range": "± 3260",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2036919,
+            "range": "± 22832",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2122316,
+            "range": "± 4264",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2171697,
+            "range": "± 3192",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4965537,
+            "range": "± 22360",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5074971,
+            "range": "± 5008",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5343104,
+            "range": "± 16227",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6613636,
+            "range": "± 10545",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6620286,
+            "range": "± 41535",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6617577,
+            "range": "± 59813",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5113497,
+            "range": "± 15404",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7387527,
+            "range": "± 39424",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7398480,
+            "range": "± 9019",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9758579,
+            "range": "± 48762",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2454401957,
+            "range": "± 18298481",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 501512261,
+            "range": "± 221331",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2804146825,
+            "range": "± 45165575",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1007557,
+            "range": "± 6459",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2800739,
+            "range": "± 16591",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1004362,
+            "range": "± 4962",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1369844578,
+            "range": "± 38857110",
             "unit": "ns/iter"
           }
         ]
