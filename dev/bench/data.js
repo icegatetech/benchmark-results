@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1780531227263,
+  "lastUpdate": 1780782479517,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -8003,6 +8003,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1369844578,
             "range": "± 38857110",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a8933dd7692a4593267f4956b998dc63dda526f8",
+          "message": "(feat) Add metrics ingest and shift (#144)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Full metrics ingestion support via HTTP and gRPC; metrics now flow\nthrough the ingest pipeline.\n* Metrics table gains a metadata MAP column to store extra metric\nmetadata.\n\n* **Bug Fixes**\n* service_name is now nullable in the metrics schema for more flexible\ningests.\n* Metrics ingestion returns detailed partial-success info when some data\npoints are dropped.\n\n* **Documentation**\n* Updated metrics table docs to describe OTLP handling and\npartial-success behavior.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-06-07T01:34:23+04:00",
+          "tree_id": "0a6eba72550bf98ac3f1d395330a3eed272c01ef",
+          "url": "https://github.com/icegatetech/icegate/commit/a8933dd7692a4593267f4956b998dc63dda526f8"
+        },
+        "date": 1780782479339,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2116352,
+            "range": "± 37181",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2076473,
+            "range": "± 2069",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2059548,
+            "range": "± 11694",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2145137,
+            "range": "± 15830",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2222387,
+            "range": "± 16436",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5219025,
+            "range": "± 71750",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5354394,
+            "range": "± 69798",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5618073,
+            "range": "± 56262",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6850046,
+            "range": "± 49588",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6736922,
+            "range": "± 101033",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6704583,
+            "range": "± 54267",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5220163,
+            "range": "± 52582",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7476252,
+            "range": "± 39176",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7503988,
+            "range": "± 48614",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9925281,
+            "range": "± 121862",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2441663901,
+            "range": "± 31459670",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 501359342,
+            "range": "± 115760",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2866831559,
+            "range": "± 35754088",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1022429,
+            "range": "± 6487",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2827221,
+            "range": "± 15382",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1016194,
+            "range": "± 9217",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1361715808,
+            "range": "± 47765374",
             "unit": "ns/iter"
           }
         ]
