@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1782519128985,
+  "lastUpdate": 1782668567077,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -8627,6 +8627,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1336809035,
             "range": "± 45043029",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "4f69aec5664c37e1c2f0ba271e2185ce26d2fc2a",
+          "message": "feat: Add operations table (#148)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Added a new `operations` Iceberg table for GenAI/LLM-derived\nprojections from trace data, including dedicated partitioning/sorting\nand Parquet optimizations (bloom filtering and pinned column encodings).\n* Extended ingestion, migrations, compaction, and query routing to\nsupport writing and compacting `operations` alongside existing trace\ndata.\n* Added an `operations` enablement flag to control whether derived\n`operations` are ingested (OTLP HTTP/gRPC).\n\n* **Bug Fixes**\n* Tightened typed attribute validation and ensured `operations` failures\nare best-effort and don’t impact successful trace export.\n\n* **Documentation**\n* Published updated schema documentation (including the new `operations`\ntable) and performance guidance.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-06-28T21:10:14+04:00",
+          "tree_id": "7186b1075932c9671726254fcaea66ed73bb55d7",
+          "url": "https://github.com/icegatetech/icegate/commit/4f69aec5664c37e1c2f0ba271e2185ce26d2fc2a"
+        },
+        "date": 1782668566884,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1987635,
+            "range": "± 48631",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2086391,
+            "range": "± 7537",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2069958,
+            "range": "± 21191",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2121384,
+            "range": "± 4101",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2177112,
+            "range": "± 7070",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4978086,
+            "range": "± 26951",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5097128,
+            "range": "± 25954",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5387076,
+            "range": "± 46055",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6676545,
+            "range": "± 22158",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6667799,
+            "range": "± 28826",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6640143,
+            "range": "± 25130",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5144242,
+            "range": "± 14100",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7439891,
+            "range": "± 32571",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7474647,
+            "range": "± 27327",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9959640,
+            "range": "± 46163",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2403966156,
+            "range": "± 49812830",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 501282379,
+            "range": "± 129121",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2878942379,
+            "range": "± 38871588",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1008281,
+            "range": "± 5944",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2823001,
+            "range": "± 11561",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1006958,
+            "range": "± 4732",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1353076620,
+            "range": "± 54911943",
             "unit": "ns/iter"
           }
         ]
