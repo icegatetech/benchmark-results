@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1782757434603,
+  "lastUpdate": 1782775780045,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -9251,6 +9251,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1262549405,
             "range": "± 46517135",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "4826f5141a4eb8fe63db4083b91ebef76fcef489",
+          "message": "(feat) GC of data and its metadata (#151)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Renamed the long-running maintenance component to **Maintain**,\ncovering Parquet compaction plus optional orphan-file cleanup.\n* Added configurable orphan-file garbage collection (enable toggle,\ndry-run, grace/min-age, concurrency/timeouts, optional metadata\ndeletion) with dedicated sweep metrics and OpenTelemetry\ninstrumentation.\n* Updated Helm/Docker/Prometheus wiring to expose the new **Maintain**\nservice and its metrics.\n\n* **Bug Fixes**\n* Fixed Helm rendering, config selection, and log/monitoring\ninstructions to consistently reference **Maintain** (replacing the\nprevious compaction/compact naming).\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-06-30T03:01:47+04:00",
+          "tree_id": "9d1cbb97d75df3a525a7dfc19567636681895ade",
+          "url": "https://github.com/icegatetech/icegate/commit/4826f5141a4eb8fe63db4083b91ebef76fcef489"
+        },
+        "date": 1782775779699,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1562902,
+            "range": "± 40646",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 1635292,
+            "range": "± 28404",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 1638284,
+            "range": "± 37217",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 1718347,
+            "range": "± 14588",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 1799120,
+            "range": "± 23542",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4386513,
+            "range": "± 171444",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 4111161,
+            "range": "± 84864",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 4305128,
+            "range": "± 54891",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 5380600,
+            "range": "± 164465",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 5670188,
+            "range": "± 175776",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 5285096,
+            "range": "± 45624",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 4171104,
+            "range": "± 138149",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 5820001,
+            "range": "± 46901",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 5857795,
+            "range": "± 50473",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 7829870,
+            "range": "± 116584",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2373651157,
+            "range": "± 42341999",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 501187799,
+            "range": "± 111802",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2904182279,
+            "range": "± 61393104",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 806525,
+            "range": "± 6546",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2236916,
+            "range": "± 20749",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 792266,
+            "range": "± 6541",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1286843765,
+            "range": "± 48006309",
             "unit": "ns/iter"
           }
         ]
