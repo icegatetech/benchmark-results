@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1782775780045,
+  "lastUpdate": 1783192926253,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -9407,6 +9407,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1286843765,
             "range": "± 48006309",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ba3cb990be2323db6e2edb07c870dd3c7f829644",
+          "message": "(feat) LLM pricing reference (#154)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Added a shared, global reference dataset containing LLM pricing data\nto the query engine.\n  * Pricing is now queryable via `reference.llm.pricing`.\n* Enabled cross-catalog querying, including joining tenant-scoped data\nwith the shared pricing dataset.\n* **Tests**\n* Added Flight SQL integration tests to verify pricing table visibility\nand correct results.\n* Added coverage for join behavior between tenant-scoped tables and the\nglobal pricing dataset, including non-empty query plan output.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-07-04T22:49:20+04:00",
+          "tree_id": "a642d1ea1bde122ed5f4cdca5318e49a56471f2d",
+          "url": "https://github.com/icegatetech/icegate/commit/ba3cb990be2323db6e2edb07c870dd3c7f829644"
+        },
+        "date": 1783192925896,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2146697,
+            "range": "± 75596",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2114465,
+            "range": "± 5991",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2077081,
+            "range": "± 7924",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2161050,
+            "range": "± 19048",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2227954,
+            "range": "± 10708",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5157533,
+            "range": "± 18861",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5294831,
+            "range": "± 20230",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5505595,
+            "range": "± 14166",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6836201,
+            "range": "± 98610",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6822807,
+            "range": "± 12065",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6833004,
+            "range": "± 21806",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5324017,
+            "range": "± 14153",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7737104,
+            "range": "± 24250",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7705771,
+            "range": "± 37109",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10047218,
+            "range": "± 28900",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2354099913,
+            "range": "± 56846938",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 501352779,
+            "range": "± 158090",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2866654107,
+            "range": "± 21397683",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 1040683,
+            "range": "± 6251",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2954562,
+            "range": "± 19477",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 1032710,
+            "range": "± 11145",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1270128354,
+            "range": "± 33448592",
             "unit": "ns/iter"
           }
         ]
