@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1783192926253,
+  "lastUpdate": 1783617097448,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -9563,6 +9563,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1270128354,
             "range": "± 33448592",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fc899111bab1d6d6692ae10c895e330b9cd36d43",
+          "message": "(feat) Replace MinIO with RustFS as the default object store everywhere (#157)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Added memory-pressure based request shedding for ingest and query\nservices, with health/readiness endpoints kept available.\n* Improved OTLP/HTTP handling for large requests (graceful 413 behavior,\ndecode offloading) plus clearer retry/load-shedding responses.\n* **Bug Fixes**\n* Standardized local/test S3-compatible object storage on RustFS and\nupdated connectivity, bucket bootstrapping, and credentials across\nexamples and configs.\n* **Documentation**\n* Updated infrastructure and development environment docs to replace\nMinIO details with RustFS, including updated endpoints and access\ncredentials.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-07-09T20:38:21+04:00",
+          "tree_id": "d83b1518a9f93c15ea0e31a24ea54529089edb58",
+          "url": "https://github.com/icegatetech/icegate/commit/fc899111bab1d6d6692ae10c895e330b9cd36d43"
+        },
+        "date": 1783617096896,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2048376,
+            "range": "± 22451",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2279698,
+            "range": "± 87453",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2130588,
+            "range": "± 47860",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2168762,
+            "range": "± 20411",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2250818,
+            "range": "± 14829",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5411089,
+            "range": "± 115109",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5333656,
+            "range": "± 162670",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5950779,
+            "range": "± 45277",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7532929,
+            "range": "± 137775",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 7751525,
+            "range": "± 75223",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 7737020,
+            "range": "± 196372",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5803554,
+            "range": "± 164438",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7829399,
+            "range": "± 112346",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7957194,
+            "range": "± 386017",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10419181,
+            "range": "± 227652",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2403922722,
+            "range": "± 91477788",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551376661,
+            "range": "± 355877",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3029141405,
+            "range": "± 82813561",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3988873,
+            "range": "± 72572",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3147216,
+            "range": "± 26208",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 4023939,
+            "range": "± 53077",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1610315883,
+            "range": "± 63965093",
             "unit": "ns/iter"
           }
         ]
