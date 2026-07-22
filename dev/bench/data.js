@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1783617097448,
+  "lastUpdate": 1784762394609,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -9719,6 +9719,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1610315883,
             "range": "± 63965093",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "643e6ce385f939cd5f7fc3ad58bafcc5e8effb13",
+          "message": "(feat) Add claude_code operation convention (#162)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n* **New Features**\n  * Added support for recognizing and projecting Claude Code operations.\n* Added JSON serialization for span attributes, tool data, and chat\nmessages.\n* Added support for content sourced from span events, including tool\nresults.\n* Added span-name-based operation recognition and improved field\nmapping.\n\n* **Bug Fixes**\n* Improved time-to-first-chunk conversion across seconds- and\nmilliseconds-based values.\n* Added validation to reject invalid negative or out-of-range\nmeasurements.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-07-23T02:49:49+04:00",
+          "tree_id": "49428fae9f79387f2b22f6b92823fb26c18eb371",
+          "url": "https://github.com/icegatetech/icegate/commit/643e6ce385f939cd5f7fc3ad58bafcc5e8effb13"
+        },
+        "date": 1784762394226,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1826544,
+            "range": "± 44416",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 1882754,
+            "range": "± 8257",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 1855096,
+            "range": "± 5290",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 1934860,
+            "range": "± 4059",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 1991821,
+            "range": "± 32814",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4504858,
+            "range": "± 44348",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 4574325,
+            "range": "± 27665",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 4790136,
+            "range": "± 9592",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 5869008,
+            "range": "± 20282",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 5886004,
+            "range": "± 32595",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 5940088,
+            "range": "± 25096",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 4640863,
+            "range": "± 54865",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 6529806,
+            "range": "± 34629",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 6566919,
+            "range": "± 11224",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 8636748,
+            "range": "± 18011",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2416493210,
+            "range": "± 54044419",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551380860,
+            "range": "± 190169",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3016029712,
+            "range": "± 72640403",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3630836,
+            "range": "± 22395",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2777673,
+            "range": "± 41908",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3672651,
+            "range": "± 22481",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1570889204,
+            "range": "± 34389455",
             "unit": "ns/iter"
           }
         ]
