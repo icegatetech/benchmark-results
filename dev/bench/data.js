@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1784919067765,
+  "lastUpdate": 1785004407426,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -10031,6 +10031,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1598437238,
             "range": "± 38154576",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "prosvirnin.s@gmail.com",
+            "name": "Sergei Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "prosvirnin.s@gmail.com",
+            "name": "Sergei Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "distinct": true,
+          "id": "445e04e4a38638bec172ee22607f8eb4e34bbf40",
+          "message": "update compaction doc",
+          "timestamp": "2026-07-25T20:00:12+02:00",
+          "tree_id": "e2a25447ed86b7ab4783f01f721efddcf4c99d0c",
+          "url": "https://github.com/icegatetech/icegate/commit/445e04e4a38638bec172ee22607f8eb4e34bbf40"
+        },
+        "date": 1785004407221,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2150635,
+            "range": "± 20684",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2060079,
+            "range": "± 9443",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2037666,
+            "range": "± 12281",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2130200,
+            "range": "± 30556",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2179377,
+            "range": "± 23462",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5101973,
+            "range": "± 22083",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5257880,
+            "range": "± 23996",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5510085,
+            "range": "± 73840",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6865901,
+            "range": "± 11953",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6883780,
+            "range": "± 20888",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6877031,
+            "range": "± 34065",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5313295,
+            "range": "± 114146",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7794049,
+            "range": "± 103807",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7880415,
+            "range": "± 50017",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10245857,
+            "range": "± 136301",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2404204968,
+            "range": "± 41361249",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551404461,
+            "range": "± 288523",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3129702289,
+            "range": "± 80269474",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3952021,
+            "range": "± 48663",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2996443,
+            "range": "± 10504",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3880792,
+            "range": "± 35642",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1580295913,
+            "range": "± 51976238",
             "unit": "ns/iter"
           }
         ]
