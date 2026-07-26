@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785096420301,
+  "lastUpdate": 1785099422196,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -10343,6 +10343,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1564245830,
             "range": "± 53775421",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "96047dceb4a9f891545e1cf3de62caad5b61fad5",
+          "message": "(feat) Add global LLM pricing table and crawler (#163)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Added a background LLM pricing crawler with multiple upstream sources,\nnormalization/canonical IDs, rate quantization, and change-only append\nto the global `prices` table.\n* Introduced the `prices_effective` view providing `valid_to` windows\nfor price history.\n* Exposed these global pricing objects through the tenant SQL endpoint\nwithout tenant isolation wrapping.\n* **Bug Fixes**\n* Improved Parquet writing for unpartitioned tables and ensured no new\nsnapshots are created when there are no effective updates.\n* **Configuration**\n* Added `maintain.pricing` settings to Helm/Kustomize (enablement, crawl\ncadence/timeouts, guards, sources, billing regions).\n* **Migration**\n* Updated table creation/upgrade paths to include the new global\n`prices` table.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-07-27T00:43:19+04:00",
+          "tree_id": "57b86c7821181fbfe858ea7e60bff50d320bd390",
+          "url": "https://github.com/icegatetech/icegate/commit/96047dceb4a9f891545e1cf3de62caad5b61fad5"
+        },
+        "date": 1785099421797,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2090589,
+            "range": "± 69474",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2070156,
+            "range": "± 10872",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2045489,
+            "range": "± 24256",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2136621,
+            "range": "± 5021",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2183038,
+            "range": "± 4131",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5130899,
+            "range": "± 14429",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5261729,
+            "range": "± 24513",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5497515,
+            "range": "± 4041",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6859473,
+            "range": "± 35005",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6817922,
+            "range": "± 9912",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6828554,
+            "range": "± 10863",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5285643,
+            "range": "± 19134",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7712048,
+            "range": "± 32328",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7666613,
+            "range": "± 10423",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10023924,
+            "range": "± 8913",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2379024356,
+            "range": "± 20648630",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551622854,
+            "range": "± 308472",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3041355780,
+            "range": "± 60420730",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 4157962,
+            "range": "± 19981",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3081636,
+            "range": "± 5227",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 4077528,
+            "range": "± 9535",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1621709284,
+            "range": "± 37677060",
             "unit": "ns/iter"
           }
         ]
