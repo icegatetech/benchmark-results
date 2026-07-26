@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785004407426,
+  "lastUpdate": 1785096420301,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -10187,6 +10187,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1580295913,
             "range": "± 51976238",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b7e4fe19cbc12d72bb5228fb0d5ceea7bac277b1",
+          "message": "GH-161 (#166)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n- **New Features**\n- Added a read-only Iceberg REST Catalog server with namespace/table\ndiscovery, pagination, snapshot selection, ETag support, and\nIceberg-standard error responses.\n- Added `catalog serve` and `catalog version` commands with YAML/TOML\nconfiguration.\n- Added a dedicated catalog container image plus Helm deployment,\nService, and values support.\n- Added configurable S3 path-style access behavior (including\nautomatic/override handling).\n- **Documentation**\n- Expanded catalog usage, configuration, contribution, and testing\nguidance.\n- **Bug Fixes**\n- Improved S3 warehouse URI handling and validation for catalog\nconfiguration and Helm rendering.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-07-26T23:33:37+04:00",
+          "tree_id": "4c80ae9bd1d1e63ba694a83dec81704521932175",
+          "url": "https://github.com/icegatetech/icegate/commit/b7e4fe19cbc12d72bb5228fb0d5ceea7bac277b1"
+        },
+        "date": 1785096419740,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2198589,
+            "range": "± 69067",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2022038,
+            "range": "± 21071",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2026475,
+            "range": "± 25755",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2089839,
+            "range": "± 28830",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2130273,
+            "range": "± 26626",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5110210,
+            "range": "± 83170",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5302168,
+            "range": "± 92527",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5575914,
+            "range": "± 67955",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6985420,
+            "range": "± 117804",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6813790,
+            "range": "± 88282",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6946945,
+            "range": "± 179130",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5403604,
+            "range": "± 49136",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 8052376,
+            "range": "± 107282",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7944643,
+            "range": "± 63492",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10354742,
+            "range": "± 91320",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2366836988,
+            "range": "± 44329200",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551376316,
+            "range": "± 332540",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3066734351,
+            "range": "± 63507971",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3839445,
+            "range": "± 71455",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2732227,
+            "range": "± 37857",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3752203,
+            "range": "± 77943",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1564245830,
+            "range": "± 53775421",
             "unit": "ns/iter"
           }
         ]
