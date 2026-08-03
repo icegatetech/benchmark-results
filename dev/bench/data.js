@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785417204694,
+  "lastUpdate": 1785716360413,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -10811,6 +10811,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1497014394,
             "range": "± 61940020",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1fba426787de1f9a8cbb8d05422c4578ad075a29",
+          "message": "Add tracing to maintain (#172)\n\nBrings the maintain service up to the tracing setup ingest already has.\n\n- MaintainConfig gains a `tracing` block, so the OTLP endpoint, sample\nratio and the on/off switch come from the config file instead of relying\non the OTEL_EXPORTER_OTLP_ENDPOINT env var alone. `run` initialises the\nsubscriber once its config is loaded (as ingest and query do) while\n`migrate` keeps the plain JSON logger. The block is validated in `run`,\nnot in MaintainConfig::validate, so migrate configs that omit it still\nload.\n\n- Compaction PLAN fans REWRITE/MANIFEST tasks out to workers that pick\nthem up with no ambient context and therefore open their own traces.\nTask payloads now carry the PLAN span's W3C traceparent and each task\nadds it as a span link, so the whole fan-out reads as one connected\ntrace. The field is serde-optional: payloads queued before the upgrade\nstill parse.\n\n- Spans added for the steps that dominate wall clock: table load,\ndata-file and manifest enumeration, merge+write, GC reference-set build,\nobject listing and orphan deletion, pricing live-rate read, per-source\nfetch and append.\n\n- Deployment configs updated on both sides (Docker Compose and Helm).\nThe maintain OTLP endpoint moves from a pod env var into the ConfigMap,\nand the `required` guard now fires only when tracing is enabled.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n* **New Features**\n* Added configurable OpenTelemetry tracing for the long-running\nmaintenance service.\n  * Enabled Jaeger OTLP export with full sampling by default.\n* Added trace propagation across compaction planning, rewriting,\nmanifest processing, garbage collection, and pricing workflows.\n  * Added validation requiring an OTLP endpoint when tracing is enabled.\n* **Documentation**\n* Documented compaction trace relationships and tracing configuration\nrequirements.\n* **Bug Fixes**\n* Preserved compatibility with legacy task payloads and safely handled\ninvalid or missing trace contexts.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-08-03T04:05:47+04:00",
+          "tree_id": "b2ceaad08da1ec47af6752ac2c62ea23c3835315",
+          "url": "https://github.com/icegatetech/icegate/commit/1fba426787de1f9a8cbb8d05422c4578ad075a29"
+        },
+        "date": 1785716360017,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2126421,
+            "range": "± 15386",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2070250,
+            "range": "± 9970",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2042109,
+            "range": "± 4438",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2121575,
+            "range": "± 14363",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2171952,
+            "range": "± 4147",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4968183,
+            "range": "± 14629",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5110379,
+            "range": "± 25871",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5341844,
+            "range": "± 7309",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6636320,
+            "range": "± 10396",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6628322,
+            "range": "± 12880",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6631958,
+            "range": "± 7242",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5110138,
+            "range": "± 5530",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7389030,
+            "range": "± 5151",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7422887,
+            "range": "± 20309",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9736160,
+            "range": "± 5459",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2453829277,
+            "range": "± 45742778",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551201486,
+            "range": "± 214243",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3066514490,
+            "range": "± 44215788",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3489277,
+            "range": "± 18093",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2785121,
+            "range": "± 10996",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3427122,
+            "range": "± 11065",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1562989452,
+            "range": "± 52365532",
             "unit": "ns/iter"
           }
         ]
