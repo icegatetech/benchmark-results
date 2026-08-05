@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785716360413,
+  "lastUpdate": 1785939071193,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -10967,6 +10967,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1562989452,
             "range": "± 52365532",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7036621cd1310aae812efd6b0a21e4b15fc7a65c",
+          "message": "fix memory leak in opendal operator (#174)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n* **New Features**\n* Added shared storage configuration and operator reuse across catalog,\nquery, ingestion, and maintenance workflows.\n* Added support for centralized object-store resolution, including\nlocal, memory, and S3 storage.\n* Added structured S3 bucket path validation and improved credential\nhandling.\n\n* **Bug Fixes**\n* Improved storage isolation and prevented invalid configurations from\nbeing reused.\n\n* **Tests**\n* Added coverage for operator reuse, concurrent access, path handling,\ncredential changes, and storage-layer behavior.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-08-05T17:37:36+04:00",
+          "tree_id": "f7ae9300260ec30f7b96f2d090f0a9c81579e4ed",
+          "url": "https://github.com/icegatetech/icegate/commit/7036621cd1310aae812efd6b0a21e4b15fc7a65c"
+        },
+        "date": 1785939070943,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2191354,
+            "range": "± 26602",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2092669,
+            "range": "± 12815",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2079591,
+            "range": "± 9137",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2163086,
+            "range": "± 14011",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2223475,
+            "range": "± 9601",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5191984,
+            "range": "± 53065",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5295809,
+            "range": "± 77469",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5645920,
+            "range": "± 40505",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7109433,
+            "range": "± 71846",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6977617,
+            "range": "± 100271",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6965636,
+            "range": "± 65574",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5156768,
+            "range": "± 46647",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7431434,
+            "range": "± 17445",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7461447,
+            "range": "± 22971",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9856567,
+            "range": "± 17411",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2379311714,
+            "range": "± 55552820",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551318880,
+            "range": "± 299947",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3066396466,
+            "range": "± 53888336",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3585929,
+            "range": "± 15682",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2764830,
+            "range": "± 20639",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3569721,
+            "range": "± 29630",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1604450216,
+            "range": "± 49130515",
             "unit": "ns/iter"
           }
         ]
