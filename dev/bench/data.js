@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785943748788,
+  "lastUpdate": 1786194717297,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -11279,6 +11279,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1596473797,
             "range": "± 51030753",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9016f25e80e3b9b1bfe9c626845d0c99160b7b81",
+          "message": "GH-165: add iceberg snapshots expiration support (#181)\n\nWithout bounded history a table keeps every snapshot it ever had, so GC\ncan reclaim nothing: manifests and data files stay referenced from\nmetadata.json forever. This adds the retention policy that lets them go.\n\nExpiration is not a maintenance job. The policy lives in the table's own\nproperties (`history.expire.*`), and every writer — ingest shift,\ncompaction rewrite, pricing append — resolves it on commit and carries a\n`RemoveSnapshots` update along with whatever it was already writing\n(support comes from the iceberg-rust bump to 0c07964). Keeping the\nvalues in table properties makes them auditable in metadata.json instead\nof an implicit default hidden in code.\n\nWhat is in the change:\n\n- `migrate/config.rs`: new `SnapshotExpirationConfig` — enabled,\nmin_snapshots_to_keep, max_snapshot_age_ms,\nmetadata_previous_versions_max — with validation and defaults (100\nsnapshots / 30 min / 200 metadata versions).\n- `migrate/operations.rs`: `migrate create` stamps the policy onto every\ntable it creates. Tables written by the Shifter declare their WAL-offset\nsummary key as a carrier expiration must keep reachable; `prices` does\nnot, since the pricing crawler writes no offset. Existing tables are\nleft untouched.\n- `MaintainConfig::validate` rejects an orphan sweep running with a zero\ngrace period, and the Helm chart gains\n`icegate.validateRetentionWindow`, which fails the render unless\n`query.engine.maxAgeSecs < migrate.snapshotExpiration.maxSnapshotAgeMs`\nand `query.engine.maxAgeSecs < maintain.gc.orphans.minAgeSecs`. A cached\nquery provider must not outlive the files it plans against.\n- Deployment configs on both sides: chart values plus configmaps, and\n`config/docker/maintain.yaml`.\n- Docs: `migrate/README.md` (retention contract), `maintain/README.md`,\nand a TODO in `query/engine/core.rs` — the ordering is enforced by\nconfiguration only; the read path should retry a missing file on a fresh\nprovider.\n- Tests: `snapshot_expiration_it.rs` integration suite, plus a `logs`\nwriter and raw object-store listing helpers shared through\n`tests/common`.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n- **New Features**\n- Added configurable snapshot expiration for newly created tables,\nincluding minimum snapshots, maximum age, and metadata retention.\n- Added retention settings to Helm deployments and maintenance\nconfiguration.\n- Preserved WAL-related metadata where applicable during table creation.\n\n- **Bug Fixes**\n- Added validation for retention windows, cache age, refresh intervals,\nand orphan cleanup grace periods.\n  - Disabled snapshot expiration now explicitly preserves snapshots.\n\n- **Documentation**\n- Expanded configuration, migration, maintenance, and public\ndocumentation guidance.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-08-08T16:38:46+04:00",
+          "tree_id": "480f34eb681a3486b9d870952409823815d064f3",
+          "url": "https://github.com/icegatetech/icegate/commit/9016f25e80e3b9b1bfe9c626845d0c99160b7b81"
+        },
+        "date": 1786194716606,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2130684,
+            "range": "± 65723",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2054444,
+            "range": "± 6299",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2029588,
+            "range": "± 38445",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2110403,
+            "range": "± 3931",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2162472,
+            "range": "± 5457",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5111387,
+            "range": "± 9599",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5334100,
+            "range": "± 54848",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5524315,
+            "range": "± 40872",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7123629,
+            "range": "± 67895",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 7201685,
+            "range": "± 121059",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 7221333,
+            "range": "± 122918",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5543032,
+            "range": "± 103974",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 8256776,
+            "range": "± 172613",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 8168661,
+            "range": "± 93231",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10799901,
+            "range": "± 193073",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2379351587,
+            "range": "± 66651585",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551494230,
+            "range": "± 174832",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3016925989,
+            "range": "± 92142157",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 4291548,
+            "range": "± 74147",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3141932,
+            "range": "± 28831",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 4133929,
+            "range": "± 66242",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1597468471,
+            "range": "± 51256765",
             "unit": "ns/iter"
           }
         ]
