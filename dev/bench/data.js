@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1786194717297,
+  "lastUpdate": 1786206160007,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -11435,6 +11435,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1597468471,
             "range": "± 51256765",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "066fa48a23c83a79337ed30b1aac7a32fe5af3f3",
+          "message": "(feat) Add sanitizer support for memory safety checks on Linux (#179)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n* **New Features**\n* Added AddressSanitizer, LeakSanitizer, and MemorySanitizer test\ntargets.\n* Added Docker support for running sanitizer checks on non-Linux\nsystems.\n  * Added scheduled and on-demand sanitizer checks in CI.\n\n* **Documentation**\n* Documented sanitizer commands, limitations, configuration, and\nmaintenance guidance.\n\n* **Bug Fixes**\n* Updated sanitizer builds to use compatible memory allocation behavior.\n  * Added documented leak suppressions for known reports.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->\n\n---------\n\nCo-authored-by: Sergei Prosvirnin <prosvirnin.s@gmail.com>",
+          "timestamp": "2026-08-08T20:09:26+04:00",
+          "tree_id": "0452146d829230dde242848498e04aaf209ec4d3",
+          "url": "https://github.com/icegatetech/icegate/commit/066fa48a23c83a79337ed30b1aac7a32fe5af3f3"
+        },
+        "date": 1786206159711,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1982168,
+            "range": "± 22442",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2192913,
+            "range": "± 94788",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2043740,
+            "range": "± 29019",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2114330,
+            "range": "± 10807",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2164970,
+            "range": "± 26024",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5097112,
+            "range": "± 5706",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5236069,
+            "range": "± 15059",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5470172,
+            "range": "± 22011",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6721513,
+            "range": "± 7223",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6721281,
+            "range": "± 27562",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6725232,
+            "range": "± 10702",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5214977,
+            "range": "± 22066",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7603233,
+            "range": "± 5273",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7609435,
+            "range": "± 14666",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9977530,
+            "range": "± 51430",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2278946750,
+            "range": "± 31203976",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551349309,
+            "range": "± 3964422",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3078757673,
+            "range": "± 65573737",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 4078982,
+            "range": "± 16110",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3040023,
+            "range": "± 10862",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 4026767,
+            "range": "± 11919",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1596764947,
+            "range": "± 50216384",
             "unit": "ns/iter"
           }
         ]
