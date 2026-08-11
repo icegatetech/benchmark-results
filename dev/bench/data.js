@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1786307176146,
+  "lastUpdate": 1786466447269,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -11747,6 +11747,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1571079904,
             "range": "± 77677674",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "660d6503b90ad5bfc4ec40f8e50f3f46d3155691",
+          "message": "implement jobmanager api improvement (#186)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n* **Monitoring**\n* Updated dashboards to display renamed Jobmanager metrics, including\njob success, duration, failures, storage latency, cache performance, and\nretry indicators.\n  * Added OpenTelemetry metrics support for Jobmanager operations.\n\n* **Reliability**\n* Improved task cancellation handling so cancelled work stops without\nbeing incorrectly marked complete.\n  * Strengthened timeout validation and overflow handling.\n\n* **Documentation**\n* Updated compaction documentation to reflect current task outcomes and\ndependency references.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-08-11T20:03:24+04:00",
+          "tree_id": "0b690cbe8cd1a82db91151c3ce9aea529de8d6dc",
+          "url": "https://github.com/icegatetech/icegate/commit/660d6503b90ad5bfc4ec40f8e50f3f46d3155691"
+        },
+        "date": 1786466446507,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2970400,
+            "range": "± 58285",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2895043,
+            "range": "± 11832",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2923212,
+            "range": "± 38111",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 3001240,
+            "range": "± 31912",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2965485,
+            "range": "± 12316",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5602438,
+            "range": "± 15314",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5710923,
+            "range": "± 8687",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 6118136,
+            "range": "± 27372",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7356393,
+            "range": "± 44806",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 7356532,
+            "range": "± 17830",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 7358281,
+            "range": "± 27506",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5919151,
+            "range": "± 23786",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7934879,
+            "range": "± 63320",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7995276,
+            "range": "± 35384",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9891037,
+            "range": "± 66094",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2441874621,
+            "range": "± 45918617",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551229606,
+            "range": "± 317474",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 2966438360,
+            "range": "± 56705788",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3693194,
+            "range": "± 18729",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2949428,
+            "range": "± 15372",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3711403,
+            "range": "± 22327",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1571643660,
+            "range": "± 48768656",
             "unit": "ns/iter"
           }
         ]
