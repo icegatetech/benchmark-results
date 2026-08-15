@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1786466447269,
+  "lastUpdate": 1786790201496,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -11903,6 +11903,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1571643660,
             "range": "± 48768656",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "68ae12301d1383c001f2fbf9443a4bf27f899392",
+          "message": "(fix) Tempo v2 trace-by-ID returns the TraceByIDResponse envelope (#189)\n\n/api/v2/traces/{id} aliased the v1 handler and returned bare OTLP, so a\nclient decoding the v2 contract got a body it could not parse.\nSplit off get_trace_v2 with the envelope encoder; v1 keeps the bare\npayload.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n* **New Features**\n* Added a v2 trace lookup endpoint returning Tempo’s `TraceByIDResponse`\nenvelope.\n* Added JSON and protobuf response formats, including complete and\npartial result statuses.\n  * Added truncation details when trace results are incomplete.\n* Preserved v1 trace lookups with bare OTLP JSON or protobuf responses.\n\n* **Bug Fixes**\n* Improved handling of unknown traces with appropriate not-found\nresponses.\n  * Added tenant-isolated trace lookup behavior.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-08-15T13:58:35+04:00",
+          "tree_id": "d894d3ad3f95125cfc377c06fdee4a19ebafd4e1",
+          "url": "https://github.com/icegatetech/icegate/commit/68ae12301d1383c001f2fbf9443a4bf27f899392"
+        },
+        "date": 1786790200961,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 3184269,
+            "range": "± 157911",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 3136029,
+            "range": "± 17376",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 3170132,
+            "range": "± 17911",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 3251164,
+            "range": "± 18863",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 3228277,
+            "range": "± 12249",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 6175545,
+            "range": "± 45962",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 6289510,
+            "range": "± 59529",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 6765958,
+            "range": "± 48914",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 8101619,
+            "range": "± 39337",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 8129084,
+            "range": "± 141950",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 8162033,
+            "range": "± 57176",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 6642738,
+            "range": "± 58364",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 8741880,
+            "range": "± 81838",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 8759703,
+            "range": "± 57188",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10823680,
+            "range": "± 232338",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2429167423,
+            "range": "± 52535800",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551276017,
+            "range": "± 389774",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3004094574,
+            "range": "± 36738492",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3802613,
+            "range": "± 25282",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2998167,
+            "range": "± 25788",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3829566,
+            "range": "± 35430",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1455638010,
+            "range": "± 63346943",
             "unit": "ns/iter"
           }
         ]
