@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1786790201496,
+  "lastUpdate": 1786891223294,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -12059,6 +12059,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1455638010,
             "range": "± 63346943",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d910c19e3f8d6b771487da98e6d3c39c2d85bd99",
+          "message": "(refactor) Replace `Box::leak` with RAII for temporary directories intests and async harnesses. (#188)\n\n- Ensure proper cleanup with `TempDir::drop`, avoiding disk and memory\nleaks.\n- Update `build_state` to return guards for temporary directories.\n- Improve `shutdown` methods for async tasks with timeout handling and\npanic propagation.\n- Simplify LSan suppressions post-harness fixes.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n- **Bug Fixes**\n- Improved leak-sanitizer accuracy with more reliable stack unwinding\nand updated suppression rules.\n  - Preserved expected retry behavior for simulated storage failures.\n\n- **Testing & Reliability**\n  - Test servers now clean up temporary data automatically.\n  - Improved startup and shutdown error handling.\n- Enabled reliable testing with dynamically assigned ports and startup\nport reporting.\n\n- **Documentation**\n- Clarified sanitizer suppression policies and retirement requirements.\n  - Updated the minimum supported Rust version to 1.95.0.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-08-16T18:03:20+04:00",
+          "tree_id": "c9100db96cd57c6c83ad95a9c2f90335ef713afd",
+          "url": "https://github.com/icegatetech/icegate/commit/d910c19e3f8d6b771487da98e6d3c39c2d85bd99"
+        },
+        "date": 1786891222723,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 3118688,
+            "range": "± 58530",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2950439,
+            "range": "± 145312",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2956893,
+            "range": "± 9147",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 3083186,
+            "range": "± 38802",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2998722,
+            "range": "± 8257",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 6704227,
+            "range": "± 405255",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 6234328,
+            "range": "± 166241",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 7168531,
+            "range": "± 188490",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 8390195,
+            "range": "± 104211",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 8142819,
+            "range": "± 341711",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 7548516,
+            "range": "± 72931",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5988871,
+            "range": "± 20494",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 8059466,
+            "range": "± 150736",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 8948932,
+            "range": "± 398336",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10020284,
+            "range": "± 100064",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2403964230,
+            "range": "± 29864073",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551239652,
+            "range": "± 278624",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3079424620,
+            "range": "± 65114688",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3437731,
+            "range": "± 13096",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2787836,
+            "range": "± 19000",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3440726,
+            "range": "± 12399",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1562557226,
+            "range": "± 49479196",
             "unit": "ns/iter"
           }
         ]
