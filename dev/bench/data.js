@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1786891223294,
+  "lastUpdate": 1786998056060,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -12215,6 +12215,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1562557226,
             "range": "± 49479196",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7c5d13b72517ed178a9111c576ca1de964b3d80a",
+          "message": "feat: Unify attribute lookups across span and scope traits (#187)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n- **New Features**\n- OTLP resource, scope, span, log, and data-point attributes are now\nhandled separately for more accurate querying and display.\n- Loki label discovery and values support dotted attribute names with\nnormalized wire-format output.\n- Tempo and TraceQL now support instrumentation-scope attributes through\nspan queries, including precedence when names overlap.\n- LogQL supports `ip` as a label name and no longer accepts legacy\ncolon-prefixed labels.\n\n- **Bug Fixes**\n- Improved attribute filtering, grouping, aggregation, and null handling\nacross queries.\n- Updated schema documentation and migration guidance for the new\nattribute columns.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-08-18T00:06:54+04:00",
+          "tree_id": "a0c5ea30d732c2eaebe847190342ec417fc40903",
+          "url": "https://github.com/icegatetech/icegate/commit/7c5d13b72517ed178a9111c576ca1de964b3d80a"
+        },
+        "date": 1786998055335,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2597737,
+            "range": "± 86554",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2492441,
+            "range": "± 25013",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2800208,
+            "range": "± 16734",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2511917,
+            "range": "± 23293",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2515222,
+            "range": "± 9799",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4879314,
+            "range": "± 22556",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 4936355,
+            "range": "± 15772",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5731470,
+            "range": "± 16116",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6718554,
+            "range": "± 21286",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6731877,
+            "range": "± 25800",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6746080,
+            "range": "± 55109",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5191710,
+            "range": "± 35190",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7416915,
+            "range": "± 43364",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7402399,
+            "range": "± 36757",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 8898539,
+            "range": "± 59638",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2303661213,
+            "range": "± 77064787",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 551413709,
+            "range": "± 110553",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3078141240,
+            "range": "± 69155113",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3697633,
+            "range": "± 14111",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2980988,
+            "range": "± 22156",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3696305,
+            "range": "± 13366",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 1530568393,
+            "range": "± 73532890",
             "unit": "ns/iter"
           }
         ]
