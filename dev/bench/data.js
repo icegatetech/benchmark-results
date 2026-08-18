@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1786998056060,
+  "lastUpdate": 1787057293075,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -12371,6 +12371,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 1530568393,
             "range": "± 73532890",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "962fefb7efdd41152fd92a529c941bccf1f52b01",
+          "message": "feat: reclaim WAL segments already shifted into Iceberg (#191)\n\nWAL segments were never deleted, so the queue grew without bound.\nMaintain now runs a per-topic cleanup loop on its own worker pool,\ndeleting up to `committed - keep_segments_count`, where the committed\noffset is read from the Iceberg snapshot chain. It fails closed — an\noffset it cannot resolve deletes nothing — and ships disabled, so an\nupgrade never begins deleting on its own.\n\nDeleting a prefix of the queue changes what its readers may assume. A\nlisting is now either empty or an unbroken run from the requested\noffset; a floor above it or a hole inside it is reported\n(`SegmentsGone`, `SegmentMissing`) rather than answered with a shorter\nlist, and the query engine turns both into an execution error naming\n`keep_segments_count`. Writer recovery drops the point probe: it finds\nthe maximum across holes and resumes above a committed offset even when\nno segment survives, seeded by offsets ingest reads from Iceberg at\nstartup without blocking on the catalog.\n\nQueries now carry a ceiling (`max_query_duration_secs`, 30s by default)\non every transport, Flight SQL streams included: it bounds how stale a\nplanned query's WAL boundary can be, which is the window\n`keep_segments_count` must cover. Object-store faults are classified\nthrough opendal too, so throttling and 5xx retry.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Added configurable WAL segment cleanup with retention, dry-run mode,\ndeletion limits, scheduling, metrics, and dedicated job storage.\n* Added startup recovery for queue writers using committed WAL offsets.\n* Added configurable query time limits across Flight SQL, Loki,\nPrometheus, and Tempo.\n  * Added detection and reporting for missing or expired WAL segments.\n\n* **Bug Fixes**\n* Improved handling of storage retries, retention gaps, stalled queries,\nand cleanup failures.\n  * Prevented stale queries from silently returning incomplete results.\n\n* **Documentation**\n* Expanded maintenance, queue retention, WAL cleanup, and Rust guidance\ndocumentation.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-08-18T16:11:46+04:00",
+          "tree_id": "f5cf1b4ec83e53891567a56fb8bfb2f40f2dad69",
+          "url": "https://github.com/icegatetech/icegate/commit/962fefb7efdd41152fd92a529c941bccf1f52b01"
+        },
+        "date": 1787057292661,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2599233,
+            "range": "± 24345",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2481813,
+            "range": "± 2574",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 3358040,
+            "range": "± 332478",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 3265220,
+            "range": "± 177586",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 3361180,
+            "range": "± 111435",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 6237843,
+            "range": "± 620536",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5072149,
+            "range": "± 75933",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5956957,
+            "range": "± 86987",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6960683,
+            "range": "± 195093",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6960545,
+            "range": "± 34205",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 7000058,
+            "range": "± 615876",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5261603,
+            "range": "± 97729",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7670776,
+            "range": "± 16994",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7800037,
+            "range": "± 195698",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10853698,
+            "range": "± 126121",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2677337068,
+            "range": "± 197353441",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1170995722,
+            "range": "± 61233034",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3722396851,
+            "range": "± 196085700",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3514190,
+            "range": "± 119246",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3437303,
+            "range": "± 302511",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 4323761,
+            "range": "± 80031",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2911473593,
+            "range": "± 99664496",
             "unit": "ns/iter"
           }
         ]
