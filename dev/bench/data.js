@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1787500604389,
+  "lastUpdate": 1787503050551,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -12995,6 +12995,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2627693888,
             "range": "± 68536042",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "892dfcae0e6fcab4e6541fe194b6872a7d6db8c8",
+          "message": "(refactor) Optimize JSON blob attribute parsing (#195)\n\nWith memoization in `AttributeView`; cap recursion depth in\n`serialize_indexed_attrs_to_json_array` to prevent stack overflows\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n* Improved reconstruction of indexed attributes, including safer\nhandling of deeply nested keys.\n* Preserved support for keys at the supported nesting limit while\nskipping overly deep keys.\n* Improved JSON attribute conversion, including valid integral\nfloating-point values.\n* Continued graceful handling of missing, malformed, null, and\nunsupported JSON values.\n* Improved consistency when the same JSON attribute is referenced\nmultiple times.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-08-23T20:23:24+04:00",
+          "tree_id": "f9a0805cbe2c6acb0e58a984b06bf309f7ea3646",
+          "url": "https://github.com/icegatetech/icegate/commit/892dfcae0e6fcab4e6541fe194b6872a7d6db8c8"
+        },
+        "date": 1787503049822,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2549127,
+            "range": "± 28293",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2505620,
+            "range": "± 8754",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2841896,
+            "range": "± 16652",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2550457,
+            "range": "± 10979",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2555750,
+            "range": "± 12093",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4966601,
+            "range": "± 9086",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5057343,
+            "range": "± 15543",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5979862,
+            "range": "± 15639",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6937368,
+            "range": "± 14256",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6917615,
+            "range": "± 95756",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6924776,
+            "range": "± 11072",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5276274,
+            "range": "± 22553",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7754896,
+            "range": "± 21453",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7791221,
+            "range": "± 13532",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9277037,
+            "range": "± 15295",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2722635626,
+            "range": "± 180995157",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1192451162,
+            "range": "± 3021099",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3828656732,
+            "range": "± 262466666",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 4041644,
+            "range": "± 12292",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3118667,
+            "range": "± 31265",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 4054918,
+            "range": "± 42166",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2916555392,
+            "range": "± 67899392",
             "unit": "ns/iter"
           }
         ]
