@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1787404656919,
+  "lastUpdate": 1787500604389,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -12839,6 +12839,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2685101018,
             "range": "± 62607373",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fad4108e1c006ccd1a547bfc2e5241054b12d5da",
+          "message": "Openinference indexed messages and convention enrich (#194)\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n- **New Features**\n- Improved OpenInference data ingestion for chat messages, tool calls,\ntool definitions, provider details, model names, embedding and reranker\nmodels, sampling parameters, and finish reasons.\n- Reconstructed nested messages and tool data from indexed attributes,\npreserving ordering and supporting gaps, arrays, and nested objects.\n- Added support for JSON-valued fields and conversion of single values\ninto one-item lists.\n\n- **Bug Fixes**\n- Malformed or incompatible JSON values are safely ignored without\ndiscarding otherwise valid records.\n- Improved field precedence and mapping consistency across supported\nmessage and event formats.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-08-23T19:42:08+04:00",
+          "tree_id": "5d9c6a6e804ec76471961c23aab41723f13e3dfd",
+          "url": "https://github.com/icegatetech/icegate/commit/fad4108e1c006ccd1a547bfc2e5241054b12d5da"
+        },
+        "date": 1787500603685,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2611943,
+            "range": "± 36448",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2481673,
+            "range": "± 11532",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2846128,
+            "range": "± 95523",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2568627,
+            "range": "± 37109",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2590896,
+            "range": "± 27762",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5032583,
+            "range": "± 45547",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5124304,
+            "range": "± 42211",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 6204274,
+            "range": "± 142974",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7360555,
+            "range": "± 180735",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 7380490,
+            "range": "± 85786",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 7415825,
+            "range": "± 162231",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5581416,
+            "range": "± 101613",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 8044132,
+            "range": "± 228597",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 8176849,
+            "range": "± 113971",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9652136,
+            "range": "± 159095",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2651094737,
+            "range": "± 148014934",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1075503038,
+            "range": "± 9416033",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3797013220,
+            "range": "± 187581532",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3413208,
+            "range": "± 34304",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2793269,
+            "range": "± 21408",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3386515,
+            "range": "± 48782",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2627693888,
+            "range": "± 68536042",
             "unit": "ns/iter"
           }
         ]
