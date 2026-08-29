@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1787503050551,
+  "lastUpdate": 1788044448835,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -13151,6 +13151,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2916555392,
             "range": "± 67899392",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgenii Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "e.v.mineev@gmail.com",
+            "name": "Evgenii Mineev",
+            "username": "frisbeeman"
+          },
+          "distinct": true,
+          "id": "17f913f467f15e770bb615643c7cf944d377ca91",
+          "message": "(helm) Automate `helm-docs` installation, regenerate chart README in CI, and standardize version handling",
+          "timestamp": "2026-08-30T02:45:23+04:00",
+          "tree_id": "e64e5d9e9efba9d013e125a7638c52477c5225a6",
+          "url": "https://github.com/icegatetech/icegate/commit/17f913f467f15e770bb615643c7cf944d377ca91"
+        },
+        "date": 1788044448124,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2388010,
+            "range": "± 60403",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2503663,
+            "range": "± 103615",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2863540,
+            "range": "± 128800",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2545185,
+            "range": "± 31093",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2550442,
+            "range": "± 24647",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5138859,
+            "range": "± 129804",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5147690,
+            "range": "± 133104",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5919245,
+            "range": "± 54562",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6877730,
+            "range": "± 63651",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6889688,
+            "range": "± 83417",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6815194,
+            "range": "± 65119",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5246473,
+            "range": "± 40529",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7621753,
+            "range": "± 62379",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7773411,
+            "range": "± 29146",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9191754,
+            "range": "± 62614",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2628080114,
+            "range": "± 137595072",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1182612344,
+            "range": "± 10758006",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3924171682,
+            "range": "± 277747805",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3922950,
+            "range": "± 116050",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3112185,
+            "range": "± 95285",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 4060188,
+            "range": "± 57402",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2907608565,
+            "range": "± 86022290",
             "unit": "ns/iter"
           }
         ]
