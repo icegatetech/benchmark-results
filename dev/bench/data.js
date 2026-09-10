@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1788044448835,
+  "lastUpdate": 1789061749707,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -13307,6 +13307,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2907608565,
             "range": "± 86022290",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "4980ac58d7228fe1fb32dbc31fe229a0ef93d51c",
+          "message": "feat(gc): ensure sweep retains live files with escaped tenant id in partition key (#199)\n\nNormalize URI handling in garbage collection to prevent premature\ndeletion of files with partition keys containing escaped characters\n(e.g., `%3A` for `:`). Added tests to confirm correctness. Removed\nredundant `url` crate dependency.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n* Fixed cleanup handling for object paths containing escaped characters,\nsuch as colons in tenant or partition values.\n* Referenced data files with escaped path values are now correctly\nrecognized, preserved, and remain readable during orphan cleanup.\n* Improved validation for storage paths that lack required URI or\nobject-path information, preventing incorrect cleanup decisions.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-09-10T20:46:38+04:00",
+          "tree_id": "114cc957b83c1f4de38275433911f0e7b4b4b354",
+          "url": "https://github.com/icegatetech/icegate/commit/4980ac58d7228fe1fb32dbc31fe229a0ef93d51c"
+        },
+        "date": 1789061749156,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2661867,
+            "range": "± 65235",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2571013,
+            "range": "± 87703",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2964725,
+            "range": "± 86183",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2618130,
+            "range": "± 56503",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2695869,
+            "range": "± 55836",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5188794,
+            "range": "± 139865",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5132312,
+            "range": "± 233355",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 6326383,
+            "range": "± 71443",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7166256,
+            "range": "± 153822",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 7044964,
+            "range": "± 132439",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 7363576,
+            "range": "± 75059",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5470347,
+            "range": "± 128974",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7925588,
+            "range": "± 99104",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 8463140,
+            "range": "± 157049",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10505841,
+            "range": "± 145318",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2668411466,
+            "range": "± 152748733",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1204667171,
+            "range": "± 11825557",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3910821681,
+            "range": "± 217910399",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3797029,
+            "range": "± 34380",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3031973,
+            "range": "± 25588",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3880106,
+            "range": "± 111597",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2774425776,
+            "range": "± 56045746",
             "unit": "ns/iter"
           }
         ]
