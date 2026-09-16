@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1789061749707,
+  "lastUpdate": 1789582066051,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -13463,6 +13463,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2774425776,
             "range": "± 56045746",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "8f19a8227fb8f4578ad3889aeeade9c8e584dd16",
+          "message": "feat(ingest)!: decide the tenant of every write by policy (#200)\n\n* Breaking Changes\n* Rejected an OTLP write whose `x-scope-orgid` names a tenant the\ndeployment does not serve, is malformed, or is repeated, instead of\nwriting it to `default`.\n* Moved `/health` off the OTLP HTTP port to the operational listener,\nwhich now runs whatever `metrics.enabled` says and refuses a port shared\nwith an OTLP receiver.\n\n* New Features\n* Added the `tenant` policy: serve one configured tenant, or take the\ntenant from the request only; a configuration without it keeps writing\nto `default`.\n* Added an optional Envoy auth proxy in front of the ingest receivers,\noff by default, terminating TLS and setting the tenant header from the\nverified ingest token.\n* Added a counter of rejected requests, split by protocol, signal and\nreason.\n\n* Performance\n* Refused a request on its headers alone, before decompression and\ndecode.\n\n* Documentation\n* Documented the tenancy modes, the refusal each protocol answers with,\nand how to run the auth proxy on the dev stand.\n\n* Chores\n* Added make targets and a workflow that render the chart and check the\nproxy rules end to end.\n\n* Deprecations\n* Kept `MetricsConfig` as an alias of the renamed operational listener\nconfiguration.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Added configurable single- and multi-tenant ingest routing with\nvalidation and rejection metrics.\n* Added Envoy authentication proxy examples for Docker Compose and Helm\ndeployments, including JWT validation and tenant assignment.\n* Added configurable OTLP bind addresses, published ports, sidecar\ncontainers, and volumes.\n* Added an always-available operational listener with `/health` and\noptional `/metrics` endpoints.\n\n* **Bug Fixes**\n  * Health probes now use the operational health endpoint.\n* Query services reject configurations with no enabled query protocols.\n\n* **Documentation**\n* Expanded ingest tenancy, proxy setup, health checks, and deployment\nguidance.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-09-16T21:26:46+04:00",
+          "tree_id": "6d4af9e0aeca01de5f7592338e5193ba45460b03",
+          "url": "https://github.com/icegatetech/icegate/commit/8f19a8227fb8f4578ad3889aeeade9c8e584dd16"
+        },
+        "date": 1789582065451,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2541389,
+            "range": "± 44833",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2353573,
+            "range": "± 5635",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2676279,
+            "range": "± 29373",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2414324,
+            "range": "± 8398",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2419165,
+            "range": "± 8424",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4799961,
+            "range": "± 19903",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 4888274,
+            "range": "± 33166",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5749365,
+            "range": "± 21415",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6751975,
+            "range": "± 37279",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6765747,
+            "range": "± 31484",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6786380,
+            "range": "± 160050",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5114420,
+            "range": "± 29218",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7504097,
+            "range": "± 31266",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7642125,
+            "range": "± 25502",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9185871,
+            "range": "± 93550",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2607022404,
+            "range": "± 156757439",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1061274529,
+            "range": "± 12735211",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3712796610,
+            "range": "± 177914574",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3337041,
+            "range": "± 49384",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2658750,
+            "range": "± 31364",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3298011,
+            "range": "± 38676",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2543021427,
+            "range": "± 44459799",
             "unit": "ns/iter"
           }
         ]
