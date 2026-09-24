@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1789582066051,
+  "lastUpdate": 1790211720926,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -13619,6 +13619,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2543021427,
             "range": "± 44459799",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "48001c93af57408efab243014c2ef529f2102e6b",
+          "message": "(feat) Add support for evaluation results projection in `operations` (#201)\n\nUpdate schema to v1.7 with `evaluations` column\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n- **New Features**\n- Operations now capture evaluation results from span attributes and\nevents, including scores, labels, explanations, response IDs, and error\ndetails.\n- Evaluation results are preserved in a structured operations field,\nwith flat results listed before event-based results.\n- Evaluator spans now use the standardized `evaluation` operation name.\n\n- **Documentation**\n  - Updated the operations schema to version 1.7.\n- Applying the schema update requires draining the WAL and recreating\nthe operations table; existing operations data will be lost.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-09-24T04:47:30+04:00",
+          "tree_id": "5fa283aa472c723f3913b1d0ae08330b0d1845ed",
+          "url": "https://github.com/icegatetech/icegate/commit/48001c93af57408efab243014c2ef529f2102e6b"
+        },
+        "date": 1790211720314,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2441342,
+            "range": "± 9871",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2563535,
+            "range": "± 98960",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2900985,
+            "range": "± 18420",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2587020,
+            "range": "± 66376",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2606470,
+            "range": "± 17087",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4990759,
+            "range": "± 42092",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5063551,
+            "range": "± 15484",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 6001333,
+            "range": "± 44788",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6942912,
+            "range": "± 20013",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6934516,
+            "range": "± 26350",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6965441,
+            "range": "± 44532",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5266634,
+            "range": "± 16167",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7793793,
+            "range": "± 34318",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7792204,
+            "range": "± 9048",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9190936,
+            "range": "± 14184",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2569731177,
+            "range": "± 193552682",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1179393868,
+            "range": "± 5792718",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3849317199,
+            "range": "± 271922947",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3958110,
+            "range": "± 16041",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3054364,
+            "range": "± 27558",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3977109,
+            "range": "± 14298",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2785353833,
+            "range": "± 71752941",
             "unit": "ns/iter"
           }
         ]
