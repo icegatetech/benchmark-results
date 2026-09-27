@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1790211720926,
+  "lastUpdate": 1790542538579,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -13775,6 +13775,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2785353833,
             "range": "± 71752941",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2f777658f4d8df0ec99f2ad4e19d89fbb97f7d26",
+          "message": "feat(query)!: decide the tenant of every read by policy (#203)\n\n* Breaking Changes\n* Refused Loki, Tempo and Flight SQL reads whose `x-scope-orgid` is\nmalformed, duplicated or names a tenant a `single` deployment does not\nserve; these were previously served `default` or the named tenant's\nrows.\n* New Features\n* Added the query `tenant` policy: `single` (default, one tenant per\ndeployment) or `multi` (tenant taken from `x-scope-orgid`, a request\nwithout it refused), set via `query.tenant` in Helm and `tenant` in\nCompose.\n* Added the `icegate_query_tenant_rejections` counter labelled by\n`protocol` and `reason`.\n* Switched the Compose stand, Kubernetes overlays and auth-proxy example\nto `multi`, with the bundled Grafana datasources sending `X-Scope-OrgID:\ndemo`.\n* Bug Fixes\n* Fixed query pods being restarted when the Loki port is disabled: both\nprobes now hit `/health` on the operational listener.\n* Refactor\n* Moved the gRPC tenant interceptor into `icegate-common`, so OTLP/gRPC\nand Flight SQL refuse the same request the same way.\n* Documentation\n* Documented the query tenant policy, its refusals per protocol and why\n`multi` must only be reachable by trusted callers.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n## Summary by CodeRabbit\n\n* **New Features**\n* Query services now support configurable single- and multi-tenant\npolicies across HTTP and Flight SQL. In multi-tenant mode, requests must\nprovide a valid tenant header; requests without one are refused instead\nof using a default tenant.\n* Deployment examples and Grafana data sources now send the tenant\nheader required by query services.\n* Tenant-related query rejections are now counted by protocol and\nreason.\n* **Bug Fixes**\n* Query health probes now use the `/health` endpoint on the operational\nmetrics port.\n* Default Grafana data sources no longer include unscoped Loki and Tempo\nconnections.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-09-28T00:41:35+04:00",
+          "tree_id": "d1ae2c2d7768923c4e370379786651eb5babcb09",
+          "url": "https://github.com/icegatetech/icegate/commit/2f777658f4d8df0ec99f2ad4e19d89fbb97f7d26"
+        },
+        "date": 1790542538183,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2556909,
+            "range": "± 25711",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2481587,
+            "range": "± 8255",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2840192,
+            "range": "± 20190",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2552287,
+            "range": "± 19942",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2548302,
+            "range": "± 7939",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4936599,
+            "range": "± 6136",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5012763,
+            "range": "± 3957",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5957941,
+            "range": "± 57265",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6896813,
+            "range": "± 11920",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6880098,
+            "range": "± 5762",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6882840,
+            "range": "± 11094",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5221679,
+            "range": "± 21562",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7693628,
+            "range": "± 25118",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7727166,
+            "range": "± 53945",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9180764,
+            "range": "± 43487",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2508812788,
+            "range": "± 181627432",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1158552915,
+            "range": "± 2378843",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3890005396,
+            "range": "± 220623346",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3682794,
+            "range": "± 21257",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3006616,
+            "range": "± 13411",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3684715,
+            "range": "± 72321",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2704007134,
+            "range": "± 79726713",
             "unit": "ns/iter"
           }
         ]
