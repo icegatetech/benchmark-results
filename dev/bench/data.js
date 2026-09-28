@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1790542538579,
+  "lastUpdate": 1790615821682,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -13931,6 +13931,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2704007134,
             "range": "± 79726713",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "df68773b4c0e0fc15f3d8354a0de10b90f519cd3",
+          "message": "perf(query): skip Parquet row groups that bloom filters rule out (#204)\n\n* New Features\n* Added `row_groups_pruned_bloom_filter` and `bloom_filter_read_errors`\nto the Iceberg scan in `EXPLAIN ANALYZE`; an unreadable bloom filter\nkeeps its row group and is counted as a read error.\n* Performance\n* Improved Iceberg reads with `=` or `IN` filters on bloom filter\ncolumns (`trace_id`, `span_id`) by skipping row groups whose bloom\nfilters prove the value absent, with unchanged query results.\n* Chores\n* Bumped the `iceberg` fork dependencies to a revision with bloom filter\nsupport.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n\n## Summary by CodeRabbit\n\n* **New Features**\n* Iceberg queries now use bloom filters to skip row groups that cannot\nmatch a query’s filters, including equality, `IN`, and combined\ntrace/span ID conditions.\n* Iceberg scan metrics now report bloom-filter pruning and read errors\nalongside output-row counts, including when a scan ends early.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-09-28T21:01:07+04:00",
+          "tree_id": "79bbf82ac5912757e6a1cbbb9cd5b1379fb2fffb",
+          "url": "https://github.com/icegatetech/icegate/commit/df68773b4c0e0fc15f3d8354a0de10b90f519cd3"
+        },
+        "date": 1790615820983,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2864940,
+            "range": "± 172918",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2949062,
+            "range": "± 164518",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 3185675,
+            "range": "± 60352",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 3091045,
+            "range": "± 127909",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2754290,
+            "range": "± 42385",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5625618,
+            "range": "± 188242",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5512995,
+            "range": "± 147155",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 6644784,
+            "range": "± 136913",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7995205,
+            "range": "± 198825",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 7484200,
+            "range": "± 155495",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 7546891,
+            "range": "± 164458",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5747203,
+            "range": "± 96404",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 8472279,
+            "range": "± 113826",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 8995504,
+            "range": "± 272897",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 10324655,
+            "range": "± 372027",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2539385085,
+            "range": "± 207041520",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1199694654,
+            "range": "± 2827298",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3898031594,
+            "range": "± 256765263",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 4117028,
+            "range": "± 31218",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3193059,
+            "range": "± 40404",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 4273113,
+            "range": "± 47252",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2779064662,
+            "range": "± 98398330",
             "unit": "ns/iter"
           }
         ]
