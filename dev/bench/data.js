@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791917408215,
+  "lastUpdate": 1792546600115,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -14243,6 +14243,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2217920685,
             "range": "± 71402571",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b9f29b87e1df10c72afb4e81fa0ca8e1848de2fe",
+          "message": "feat!: signed releases, TLS with hot reload, Pod Identity and restricted pods (#209)\n\nPart of #207: what a hosted data plane needs before it can run IceGate\nfrom the ghcr releases. N/N-1 data compatibility is split into #208;\nper-pod OTLP request metrics are #205.\n\n**Builds on icegatetech/jobmanager#11 (merged).** `Cargo.toml` pins\njobmanager to its merge commit `24c0926`.\n\n## Release\n\n- `release.yml` signs the four images (`icegate-ingest`, `-query`,\n`-maintain`, `-catalog`) by digest with `--recursive`, verifies every\nimage (index and each per-platform digest) and the chart with the exact\nidentity\n`https://github.com/icegatetech/icegate/.github/workflows/release.yml@refs/tags/v<version>`\nand issuer `https://token.actions.githubusercontent.com`, and signs the\nchart by digest. cosign `v2.5.2` through a pinned `cosign-installer` SHA\n— the version and format that signed the `v0.2.0-rc10` chart.\n- `scripts/release-check-unpublished.py` refuses to publish a version\nthat already exists (exit 1), and fails closed on any registry or auth\nerror (exit 2). The `docker` job checks all images and the chart before\npushing anything; `helm-chart` re-checks the chart, so re-running only\nthat job still works.\n- The chart README's `cosign verify` snippets use the exact identity.\n- Already applied in repo settings (not in this diff): the ruleset\n\"Protect release tags\" limits creating, moving and deleting `v*` tags to\nrepository admins.\n\n## Chart\n\n- Every image, the `busybox` and `aws-cli` helper images included, takes\n`repository`/`tag`/`digest` and renders `repository:tag@digest` when a\ndigest is set.\n- Optional `appProtocol` on every Service port; unset renders nothing.\n- `scripts/helm-render-test.py` proves every rendered pod (all\ncomponents, init containers, the migrate Job, the auth-proxy example,\nwith TLS on) meets the `restricted` Pod Security level.\n`podSecurity.checkRestricted` (off by default) refuses sidecars or\nvolumes that would break it.\n- `<component>.tls.{enabled,secretName}` mounts the TLS Secret as a\ndirectory at `/etc/icegate-tls`, renders the service's `tls` block,\nswitches the default probes to HTTPS and the ServiceMonitor to https\nwith `tls.caConfigMapName`.\n- No empty job-storage `endpoint` is rendered.\n\n## TLS on every listener, with hot reload\n\n- New `icegate_common::listener`: `TlsConfig`; `ServerCertificate`\n(aws-lc-rs provider chosen explicitly, lock-free swap, a bad or\nhalf-written pair never replaces a good one, metrics\n`icegate_tls_certificate_reloads_total{outcome}` and\n`icegate_tls_certificate_not_after_seconds`, pinned by\n`tls_scraped_metrics`); `ServerListener` (plaintext or TLS, handshakes\noff the accept path with a timeout, ALPN `h2` for gRPC and `http/1.1`\nfor axum, TCP_NODELAY on gRPC); `ListenerRuntime`;\n`start_listener_runtime`.\n- All listeners of ingest (OTLP gRPC, OTLP HTTP, operational), query\n(Loki, Prometheus, Tempo, Flight SQL, operational) and maintain\n(operational) serve through it. With no `tls` block they behave as\nbefore; bracketed IPv6 hosts keep binding.\n- The auth-proxy example: Envoy reloads its certificate through SDS\n(`watched_directory`) and reaches icegate's loopback listeners over TLS,\nverifying the ingest Service name. `scripts/authproxy-test.sh` covers\ncertificate rotation without a restart and a refused wrong upstream\nname.\n\n## S3 credentials from the default chain (EKS Pod Identity)\n\n- `icegate_common::storage::StaticCredentials` holds the one key-pair\nrule (both or neither, blank counts as absent, a session token needs\nkeys); the storage registry and both job-storage configs use it.\n- Ingest's and maintain's job storage no longer require\n`AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` or an endpoint; without keys\nthey use the AWS default credential chain.\n`crates/icegate-maintain/tests/pod_identity_it.rs` shows object_store\n(catalog), opendal (data) and jobmanager (job state) all sign with\ncontainer credentials, session token included.\n- `JobsStorageConfig`'s `Debug` no longer prints the secret key.\n\n## Breaking changes\n\n- Chart: `<component>.waitForDependencies.image` and `.awsCliImage`\n(query, ingest, migrate, maintain) are maps of\n`repository`/`tag`/`digest`, not strings. A string now fails the render\nwith a message naming the key.\n- `icegate_common::run_operational_server` and the public\n`run`/`run_with_port_tx` of the ingest (`otlp_http`, `otlp_grpc`) and\nquery (`loki`, `prometheus`, `tempo`, `flight_sql`) servers take a\n`ListenerRuntime` instead of a `CancellationToken`.\n- `JobsStorageConfig.endpoint` (ingest, maintain) is `Option<String>`;\nblank configured keys count as absent instead of being an error.\n- Default releases roll the ingest and maintain pods once on upgrade\n(the dropped empty endpoint changes `checksum/config`).\n\n## Tests\n\nTargeted per change: the new `icegate-common` suites (`tls_certificate`,\n`tls_listener`, `tls_scraped_metrics`, listener and credentials units),\ningest `tls_listeners`, query Loki/Tempo/Flight SQL harnesses incl. TLS\ncases, ingest/maintain config and job-storage units, `pod_identity_it`,\nand the Docker-backed ingest `pipeline_it_tests` and maintain\n`compaction_e2e_it`, `gc_sweep_it`, `wal_cleanup_runner_it`,\n`pricing_crawl_it`; fmt and clippy `-D warnings` per touched crate;\n`make helm-lint helm-template helm-catalog-test helm-rest-uri-test\nhelm-render-test helm-metadata-test`; `make envoy-config-test` and `make\nauthproxy-test` (macOS/OrbStack).\n\nNot run: the full `make ci`; the sanitizers (`make sanitize-address`,\n`make sanitize-leak`), which docs/tests.md asks for on a TLS change —\nthe `sanitize` label it mentions does not exist in this repository yet;\nthe auth-proxy rotation case on Linux (CI's `deploy-config.yml` is its\nfirst Linux run).\n\n## After merge\n\nCut the next release candidate and run `cosign verify` with the exact\nidentity on all four images (index and one per-platform digest) and the\nchart — the only check of the release half that cannot run before a tag.\n\n## Follow-ups (not in this PR)\n\nComponent tests that ingest's and maintain's `run.rs` hand the TLS\nruntime to every listener (query has one); one shared test-certificate\nhelper instead of four copies; `artifacthub.io/changes` entries before\ntagging; smaller test-hygiene items.\n\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n<!-- coderabbit-ai-generated:v1 -->\n\n## Summary by CodeRabbit\n\n* **New Features**\n* Added optional server-side TLS for ingest, query, and maintenance\nservices, with certificate reloads and TLS-aware health checks and\nmetrics scraping.\n  * Added TLS support for authentication proxy connections.\n* Job-state storage now supports AWS default credentials and regional\nendpoint defaults.\n* Added Helm options for image digests, Service protocol hints, and\nrestricted Pod Security checks.\n* **Security**\n* Release artifacts are signed and verified, with duplicate image and\nchart versions rejected.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-10-21T04:47:32+04:00",
+          "tree_id": "fbf875d29dd79ade14cf560ad0177997e04d211a",
+          "url": "https://github.com/icegatetech/icegate/commit/b9f29b87e1df10c72afb4e81fa0ca8e1848de2fe"
+        },
+        "date": 1792546599894,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2618692,
+            "range": "± 33909",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2558195,
+            "range": "± 22466",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2894764,
+            "range": "± 69469",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2639716,
+            "range": "± 22756",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2612180,
+            "range": "± 18616",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 5117989,
+            "range": "± 41281",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5158810,
+            "range": "± 129123",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 6003803,
+            "range": "± 42663",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6969004,
+            "range": "± 89046",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6994207,
+            "range": "± 69899",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6916231,
+            "range": "± 24697",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5264204,
+            "range": "± 44420",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7720144,
+            "range": "± 33700",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7816387,
+            "range": "± 51975",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9365432,
+            "range": "± 67685",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2683909032,
+            "range": "± 184845635",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1178948297,
+            "range": "± 7288611",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3876310457,
+            "range": "± 252464319",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 4075623,
+            "range": "± 50445",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 3092142,
+            "range": "± 40494",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3964818,
+            "range": "± 87775",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2874105270,
+            "range": "± 59889849",
             "unit": "ns/iter"
           }
         ]
