@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1792546600115,
+  "lastUpdate": 1793322254057,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -14399,6 +14399,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2874105270,
             "range": "± 59889849",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mineev@triplecloud.team",
+            "name": "Evgeniy Mineev",
+            "username": "frisbeeman"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3248b2caf485d7a54dfe449d1f050d29864d7c91",
+          "message": "fix(pricing)!: price OpenRouter's time-of-day overrides instead of failing to decode them (#214)\n\n## What broke\n\nSince 2026-10-29 every pricing crawl on `v0.2.0-rc12` logs\n\n    pricing source failed; its live rates stay in effect\n    source: openrouter\nerror: storage error: openrouter: decode failed: missing field\n`min_prompt_tokens`\n\n`GET https://openrouter.ai/api/v1/models` now carries time-of-day\nentries in\n`pricing.overrides` (`utc_days`, `utc_start`, `utc_end`) that have no\n`min_prompt_tokens`. The source required that field on every override,\nand decoding is\nall-or-nothing, so 4 models (deepseek-v4-pro-0813,\ndeepseek-v4.1-flash-1017,\ntencent/hy3, tencent/hy4-preview) kept the whole OpenRouter catalogue\n(457 models) from\nbeing priced. LiteLLM in the same crawl is unaffected.\n\n## What changes\n\n**OpenRouter source.** An override is now either a context tier\n(`min_prompt_tokens`)\nor a time-of-day window (`utc_days` and/or `utc_start`+`utc_end`, HHMM\nUTC, start\ninclusive, end exclusive, wrapping past midnight; `utc_days` is\nevaluated at the request\ninstant). Context tiers expand exactly as before. Windows are resolved\nthe way the\nmodels API documents them: an entry applies where all its conditions\nhold, later\nentries win per price, and a price an entry omits falls back to the base\nprice. They\nbecome rows that partition the UTC week, with neighbours at equal rates\nmerged, so the\nrows follow the prices rather than how upstream cuts its windows. A\nmodel whose windows\nchange no price stays one unscoped row. Shapes that cannot be\nrepresented, which the\nAPI documents as unbilled, fail the source loudly, as any decode error\ndoes today:\na threshold combined with a window, a list mixing tiers and windows, a\nhalf-specified\nwindow, an empty or unknown `utc_days`, an impossible clock time, or an\nentry with no\ncondition.\n\nOne undecodable model still fails the whole source (unchanged).\n\n**`prices` schema (v1.8).** Two optional `INTEGER` columns appended\nafter\n`source_url`: `min_week_minute` (now part of the rate key) and\n`max_week_minute`,\ncounted in minutes of the UTC week from Monday 00:00. NULL is that end\nof the week, so a\nrow with both NULL is not time-scoped. A model's window starting the\nweek keeps that\nunscoped key: when a model that was priced all week gains windows, that\nrow revises its\nold unscoped row instead of leaving it in effect beside the windows.\nThis is the same\nway the base context tier (`min_input_tokens = 0`) revises an untiered\nrow. LiteLLM and\nBedrock rows are unscoped.\n\n**Views.** The new `prices_effective_by_time_of_day` carries every row,\nwith `valid_to`\nderived over the full key, `min_week_minute` included.\n`prices_effective` is that view\nless its time-scoped rows. It filters after deriving `valid_to`, so a\nmodel's unscoped\nrow ends where the model's windows begin instead of staying current.\n\n**Migration in place.** `migrate create` (the command the Helm\npre-upgrade Job and\ncompose run) and `migrate upgrade` now append the code's new optional\ncolumns to an\nexisting `prices` table. Only `prices` opts in, and only when the drift\nis purely\ntrailing optional columns; anything else is still reported for drop and\nrecreate.\nExisting rows read the new columns as NULL and keep their keys. The same\ncommit adds a\nsnapshot with no data (its summary records `icegate.added-columns`),\nbecause a scan\nprojects the current snapshot's schema: without it, every reader, the\ncrawler included,\nwould keep the old columns until the next append. No deployment config\nchanges.\n\n## Consumers of `prices`\n\nNo reader of `prices_effective` has to change for this to deploy safely.\nThat view\nnow leaves time-scoped rows out, so it still holds at most one row per\nkey at any\ninstant, as before. The 4 time-of-day models have no row in it from the\ncrawl that\nfirst saw their windows; they were unpriced anyway while the OpenRouter\nsource failed\nto decode.\n\nA new view, `iceberg.icegate.prices_effective_by_time_of_day` (also on\nthe Flight SQL\nglobal allowlist), holds every row. A reader moves to it, and adds the\ntime-of-day\npredicate, to price those 4 models:\n\ncoalesce(min_week_minute, 0) <= m AND m < coalesce(max_week_minute,\n10080)\n\nwhere `m` is the operation's minute of the UTC week, Monday 00:00 = 0.\nWithout the\npredicate, a reader that keeps one row per operation picks one of a\nmodel's windows\narbitrarily (they share `valid_from` and `min_input_tokens`), and a\nreader that checks\nfor a unique match finds several. Readers can move once this release is\ndeployed, in\nany order.\n\nA raw `prices` reader (e.g. Trino) needs the predicate, or\n`min_week_minute IS NULL\nAND max_week_minute IS NULL` for the old shape.\n\n## Not in this PR\n\n- Sort order: an evolved `prices` keeps the sort order it was created\nwith (without\n`min_week_minute`); a freshly created one includes it. Nothing reads or\nwrites by it.\n- Rate retraction (existing follow-up): nothing retires a key a later\ncrawl omits. If\nOpenRouter later moves a window start or drops a model's windows, the\nold window's\nrow stays live beside the new ones, as a moved or dropped context-tier\nboundary\n  already does.\n- `min_prompt_tokens` is documented upstream as \"strictly greater than\";\nthe source\nkeeps storing it as an inclusive `min_input_tokens` (one token off at\nthe boundary).\n  Changing that re-keys every tiered row, which wants retraction first.\n\n## Tests\n\n- `cargo test -p icegate-maintain --lib`: 271 passed.\n- `cargo test -p icegate-maintain --test migrate_integration_test`: 9\npassed, including\n`create_adds_the_time_of_day_columns_to_an_existing_prices_table`\n(evolves a\npre-change `prices` holding a row, reads it back, appends a time-scoped\nrow, re-runs\n`create`) and\n`create_stamps_the_evolved_schema_on_a_prices_table_with_no_snapshot`.\n- `cargo test -p icegate-maintain --test pricing_crawl_it`: 3 passed.\n- `cargo test -p icegate-common --lib`: 274 passed.\n- `cargo test -p icegate-query --lib`: 585 passed.\n- `cargo test -p icegate-query --test flight_sql_tests`: 23 passed,\nincluding\n  `prices_effective_by_time_of_day_view_is_selectable`.\n- `cargo clippy -p icegate-common -p icegate-maintain -p icegate-query\n--all-targets -- -D warnings`: clean.\n- `cargo +nightly fmt -p icegate-common -p icegate-maintain -p\nicegate-query -- --check`: clean.\n- Regression:\n`decodes_a_catalogue_mixing_time_of_day_and_context_tier_models` fails\non\n`main` with the error the crawler logs and passes here. A one-off run\nagainst a capture of\n  the live feed (2026-10-29) priced all 457 models (603 rows).",
+          "timestamp": "2026-10-30T04:14:01+04:00",
+          "tree_id": "053e805fde0765d5f3d82b4bc45669a68c7cd9c3",
+          "url": "https://github.com/icegatetech/icegate/commit/3248b2caf485d7a54dfe449d1f050d29864d7c91"
+        },
+        "date": 1793322253813,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2373085,
+            "range": "± 5035",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2598433,
+            "range": "± 124207",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2841275,
+            "range": "± 46332",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2527344,
+            "range": "± 6827",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2529797,
+            "range": "± 9269",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4967368,
+            "range": "± 82941",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5023366,
+            "range": "± 30190",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 5966108,
+            "range": "± 19812",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 6930645,
+            "range": "± 23054",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6924611,
+            "range": "± 28162",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6932310,
+            "range": "± 20846",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5234841,
+            "range": "± 7057",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7756822,
+            "range": "± 23389",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7801379,
+            "range": "± 16569",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9297285,
+            "range": "± 31552",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2631012964,
+            "range": "± 156666827",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1108344856,
+            "range": "± 2814271",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3789678582,
+            "range": "± 217118614",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3563453,
+            "range": "± 17450",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2774009,
+            "range": "± 19862",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3558168,
+            "range": "± 9227",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2724716829,
+            "range": "± 64103857",
             "unit": "ns/iter"
           }
         ]
