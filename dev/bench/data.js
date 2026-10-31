@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793455876454,
+  "lastUpdate": 1793458095802,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -14711,6 +14711,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2056792107,
             "range": "± 49800167",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "aaad055c2bbf16c0bf96375ac33b4856d8d376aa",
+          "message": "perf(common): skip operations row groups without the looked-up conversation (#216)\n\n* Performance\n   * Added a bloom filter on `conversation_id` to `operations` data\nfiles, so a lookup of one conversation skips the row groups that do not\nhold it; files written earlier gain the filter when compaction rewrites\nthem.",
+          "timestamp": "2026-10-31T18:34:06+04:00",
+          "tree_id": "e55d1d41be5fe32462a61fadd916d8befa352ede",
+          "url": "https://github.com/icegatetech/icegate/commit/aaad055c2bbf16c0bf96375ac33b4856d8d376aa"
+        },
+        "date": 1793458095600,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 2363116,
+            "range": "± 17156",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 2490021,
+            "range": "± 86020",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 2834686,
+            "range": "± 95030",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 2524696,
+            "range": "± 119200",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 2523206,
+            "range": "± 30282",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 4933452,
+            "range": "± 39055",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 5027711,
+            "range": "± 61289",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 6100241,
+            "range": "± 72789",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 7086152,
+            "range": "± 81233",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 6948647,
+            "range": "± 67694",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 6938329,
+            "range": "± 51929",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 5233761,
+            "range": "± 21716",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 7741874,
+            "range": "± 39767",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 7815920,
+            "range": "± 54885",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 9315846,
+            "range": "± 34610",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2617294858,
+            "range": "± 150165530",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 1102413834,
+            "range": "± 2367722",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3798368252,
+            "range": "± 218527807",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 3547574,
+            "range": "± 9344",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 2781995,
+            "range": "± 27623",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 3558827,
+            "range": "± 37066",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2732771655,
+            "range": "± 79087647",
             "unit": "ns/iter"
           }
         ]
