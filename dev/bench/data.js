@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793322254057,
+  "lastUpdate": 1793455876454,
   "repoUrl": "https://github.com/icegatetech/icegate",
   "entries": {
     "IceGate Benchmarks": [
@@ -14555,6 +14555,162 @@ window.BENCHMARK_DATA = {
             "name": "end_to_end/write_then_read",
             "value": 2724716829,
             "range": "± 64103857",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "s.prosvirnin@triplecloud.team",
+            "name": "Sergey Prosvirnin",
+            "username": "s-prosvirnin"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3ff04a7dafce2c1c3f889ae1768882aeecd66623",
+          "message": "perf(common): write bloom filters at the end of data files (#215)\n\n* Performance\n* Improved the layout of Iceberg data files: the bloom filters of all\nrow groups are now written together at the end of the file, after the\nrow data, so a reader can fetch them with one request instead of one per\nrow group.\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai\n-->\n<!-- coderabbit-ai-generated:v1 -->\n\n## Summary by CodeRabbit\n\n* **Bug Fixes**\n* Parquet files now place bloom filters after column data, with\nconsistent placement across row groups.\n* Improved validation checks confirm bloom-filter placement and\nrow-group layout in generated files.\n\n* **Maintenance**\n* Updated the Iceberg-related components and adjusted security-audit\ntracking.\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
+          "timestamp": "2026-10-31T17:39:27+04:00",
+          "tree_id": "f44b995ddbe648fbc95f508ef7a15cdd8cf7a2c0",
+          "url": "https://github.com/icegatetech/icegate/commit/3ff04a7dafce2c1c3f889ae1768882aeecd66623"
+        },
+        "date": 1793455876080,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "log_stream_queries/simple_selector",
+            "value": 1529358,
+            "range": "± 77895",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/multiple_matchers",
+            "value": 1684864,
+            "range": "± 49038",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/attribute_access",
+            "value": 1802514,
+            "range": "± 25179",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_contains",
+            "value": 1608209,
+            "range": "± 83557",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "log_stream_queries/line_filter_regex",
+            "value": 1625981,
+            "range": "± 61195",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/count_over_time",
+            "value": 3144846,
+            "range": "± 31805",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/rate",
+            "value": 3146152,
+            "range": "± 22748",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations/bytes_over_time",
+            "value": 3678247,
+            "range": "± 9331",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/sum_over_time_unwrap",
+            "value": 4358379,
+            "range": "± 11930",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/avg_over_time_unwrap",
+            "value": 4365191,
+            "range": "± 24326",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "range_aggregations_unwrap/quantile_over_time",
+            "value": 4360944,
+            "range": "± 27315",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_no_grouping",
+            "value": 3290479,
+            "range": "± 8488",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_by_single_label",
+            "value": 4740177,
+            "range": "± 18415",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/avg_by_multiple_labels",
+            "value": 4867714,
+            "range": "± 538222",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "vector_aggregations/sum_without",
+            "value": 5842972,
+            "range": "± 68175",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/small_batches",
+            "value": 2453321529,
+            "range": "± 62053801",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/large_batches",
+            "value": 855994114,
+            "range": "± 10103468",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "write_performance/concurrent_topics",
+            "value": 3315022503,
+            "range": "± 121850212",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments",
+            "value": 2154787,
+            "range": "± 29449",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/read_single_segment",
+            "value": 1756258,
+            "range": "± 90251",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "read_performance/list_segments_count",
+            "value": 2159893,
+            "range": "± 23662",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "end_to_end/write_then_read",
+            "value": 2056792107,
+            "range": "± 49800167",
             "unit": "ns/iter"
           }
         ]
